@@ -1,0 +1,17 @@
+
+   /target/
+   *.class
+   *.jar
+   *.war
+   
+   # Arquivos do Windows
+   Thumbs.db
+   Desktop.ini
+   
+   # IDEs (Eclipse, IntelliJ, VS Code)
+   .classpath
+   .project
+   .settings/
+   .idea/
+   *.iml
+   .vscode/

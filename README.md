@@ -89,6 +89,7 @@
 * Caso novas atividades sejam atribuídas, esta seção será atualizada.
 
 </content>
+
 # Convenção de Commits
 
 Para manter o histórico do projeto organizado e facilitar o acompanhamento da participação de todos os integrantes, a equipe adotará uma convenção para as mensagens de commit.
@@ -112,7 +113,7 @@ git commit -m "docs: atualiza README"
 git commit -m "test: adiciona testes do ContratoService"
 ```
 
-## 📋 Prefixos Utilizados
+## Prefixos Utilizados
 
 | Prefixo     | Descrição                                          |
 | ----------- | -------------------------------------------------- |

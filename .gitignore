@@ -1,17 +1,80 @@
+# =========================
 
-   /target/
-   *.class
-   *.jar
-   *.war
-   
-   # Arquivos do Windows
-   Thumbs.db
-   Desktop.ini
-   
-   # IDEs (Eclipse, IntelliJ, VS Code)
-   .classpath
-   .project
-   .settings/
-   .idea/
-   *.iml
-   .vscode/
+# Maven
+
+# =========================
+
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# =========================
+
+# Java
+
+# =========================
+
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+
+*.log
+
+# =========================
+
+# Eclipse
+
+# =========================
+
+.project
+.classpath
+.settings/
+.factorypath
+
+
+# =========================
+
+# IntelliJ IDEA
+
+# =========================
+
+.idea/
+*.iml
+out/
+
+# =========================
+
+# VS Code
+
+# =========================
+
+.vscode/
+
+# =========================
+
+# Sistema Operacional
+
+# =========================
+
+# Windows
+
+Thumbs.db
+Desktop.ini
+
+# macOS
+
+.DS_Store
+
+# Linux
+
+*~
+
+
+

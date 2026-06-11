@@ -47,10 +47,6 @@
 * RN04 - Inadimplência
 * RN05 - Integridade
 
-### Persistência de Dados
-
-* Implementação do salvamento e carregamento dos dados utilizando arquivos
-* Manipulação da persistência sem utilização de banco de dados
 
 ### Documentação
 
@@ -80,6 +76,11 @@
 * RN02 - Cálculo de Valor
 * RN03 - Multa por Atraso
 
+### Persistência de Dados
+
+* Implementação do salvamento e carregamento dos dados utilizando arquivos
+* Manipulação da persistência sem utilização de banco de dados
+
 ### Padrões de Projeto
 
 * Estudo e implementação do padrão Facade
@@ -87,6 +88,10 @@
 ### Observações
 
 * Caso novas atividades sejam atribuídas, esta seção será atualizada.
+
+## João Henrique
+
+
 
 </content>
 

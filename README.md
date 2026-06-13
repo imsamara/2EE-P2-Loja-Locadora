@@ -9,7 +9,6 @@
 ### CRUDs
 
 * CRUD de Usuários
-* CRUD de Itens
 
 ### Regras de Negócio
 
@@ -45,8 +44,6 @@
 ### Regras de Negócio
 
 * RN04 - Inadimplência
-* RN05 - Integridade
-
 
 ### Documentação
 
@@ -90,7 +87,11 @@
 * Caso novas atividades sejam atribuídas, esta seção será atualizada.
 
 ## João Henrique
-
+ ### Cruds
+ * CRUD de Itens
+ * CRUD de Fornecedores
+ ### Regra de negócio
+ * RN05 - Integridade
 
 
 </content>

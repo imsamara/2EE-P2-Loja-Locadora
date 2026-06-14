@@ -8,7 +8,7 @@
 
 ### CRUDs
 
-* CRUD de Usuários
+* CRUD de Fornecedores
 
 ### Regras de Negócio
 
@@ -65,7 +65,7 @@
 
 ### CRUDs
 
-* CRUD de Fornecedores
+* CRUD de Usuários
 * CRUD de Contratos de Aluguel
 
 ### Regras de Negócio

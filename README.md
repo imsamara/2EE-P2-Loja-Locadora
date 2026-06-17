@@ -89,7 +89,6 @@
 ## João Henrique
  ### Cruds
  * CRUD de Itens
- * CRUD de Fornecedores
  ### Regra de negócio
  * RN05 - Integridade
 

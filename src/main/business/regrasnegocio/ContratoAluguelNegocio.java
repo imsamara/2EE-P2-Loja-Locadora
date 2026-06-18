@@ -18,22 +18,22 @@ public class ContratoAluguelNegocio {
 
     public ContratoAluguel criarContrato(Cliente cliente, Item item, String dataRetirada, String dataDevolucaoPrevista) {
         if (cliente == null) {
-             System.out.println("Cliente inválido.");
+             System.out.println("Cliente inválido");
              return null;
         }
 
         if (item == null) {
-             System.out.println("Item inválido.");
+             System.out.println("Item inválido");
              return null;
         }
 
         if (!itemDisponivel(item)) {
-             System.out.println("Item indisponível para aluguel.");
+             System.out.println("Item indisponível para aluguel");
              return null;
         }
 
         if (clienteEstaInadimplente(cliente)) {
-             System.out.println("Cliente possui multas pendentes.");
+             System.out.println("Cliente possui multas pendentes");
              return null;
         }
 
@@ -44,21 +44,22 @@ public class ContratoAluguelNegocio {
         long diasAluguel = ChronoUnit.DAYS.between( retirada, devolucaoPrevista);
 
         if (diasAluguel <= 0) {
-             System.out.println("A data de devolução deve ser posterior à data de retirada.");
+             System.out.println("A data de devolução deve ser posterior à data de retirada");
              return null;
         }
         
-        int novoId = contratoCrud.gerarProximoId();
         
+        int novoId = contratoCrud.gerarProximoId();
+
         double valorTotal = item.getTaxaDiaria() * diasAluguel;
 
-        ContratoAluguel contrato = new ContratoAluguel( novoId, cliente, item, dataRetirada, dataDevolucaoPrevista, null, valorTotal);
+        ContratoAluguel contrato = new ContratoAluguel(novoId, cliente, item, dataRetirada, dataDevolucaoPrevista, null, valorTotal);
 
         contratoCrud.cadastrarContrato(contrato);
 
         item.setStatus("ALUGADO");
 
-        System.out.println("Contrato criado com sucesso.");
+        System.out.println("Contrato criado com sucesso");
 
         return contrato;
     }
@@ -67,13 +68,13 @@ public class ContratoAluguelNegocio {
 
         ContratoAluguel contrato = contratoCrud.lerContrato(contratoId);
         if (contrato == null) {
-            System.out.println("Contrato não encontrado.");
+            System.out.println("Contrato não encontrado");
             return 0;
         }
         contrato.setDataDevolucaoReal(dataDevolucaoReal);
 
         if (!contrato.getStatus().equals("ATIVO")) {
-            System.out.println("Contrato já finalizado ou cancelado.");
+            System.out.println("Contrato já finalizado ou cancelado");
             return 0;
         }
 
@@ -100,7 +101,7 @@ public class ContratoAluguelNegocio {
 
         contratoCrud.atualizarContrato(contrato);
 
-        System.out.println("Devolução realizada com sucesso.");
+        System.out.println("Devolução realizada com sucesso");
 
         return valorMulta;
     }
@@ -110,7 +111,7 @@ public class ContratoAluguelNegocio {
         ContratoAluguel contrato = contratoCrud.lerContrato(contratoId);
 
         if (contrato == null) {
-            System.out.println("Contrato não encontrado.");
+            System.out.println("Contrato não encontrado");
             
 
 
@@ -118,7 +119,7 @@ public class ContratoAluguelNegocio {
         }
 
         if (!contrato.getStatus().equals("ATIVO")) {
-            System.out.println("Somente contratos ativos podem ser cancelados.");
+            System.out.println("Somente contratos ativos podem ser cancelados");
             
             return false;
         }
@@ -129,7 +130,7 @@ public class ContratoAluguelNegocio {
         
         contratoCrud.atualizarContrato(contrato);
 
-        System.out.println("Contrato cancelado com sucesso.");
+        System.out.println("Contrato cancelado com sucesso");
         return true;
     }
 

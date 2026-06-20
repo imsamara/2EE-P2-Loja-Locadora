@@ -1,4 +1,4 @@
-public interface CrudContratoAluguel {
+public interface IContratoAluguel {
     public void cadastrarContrato(ContratoAluguel contrato);
     public ContratoAluguel lerContrato(int id);
     public boolean atualizarContrato(ContratoAluguel contrato);

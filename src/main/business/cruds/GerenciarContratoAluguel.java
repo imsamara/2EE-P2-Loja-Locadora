@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class GerenciarContratoAluguel implements CrudContratoAluguel {
+public class GerenciarContratoAluguel implements IContratoAluguel {
 
     private List<ContratoAluguel> contratos = new ArrayList<>();
 

@@ -4,7 +4,7 @@ import java.time.temporal.ChronoUnit;
 
 public class ContratoAluguelNegocio {
 
-    private CrudContratoAluguel contratoCrud;
+    private IContratoAluguel contratoCrud;
 
     private double multaFixa = 10.0;
     

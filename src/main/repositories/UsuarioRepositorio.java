@@ -71,4 +71,23 @@ public class UsuarioRepositorio implements IUsuarioRepositorio {
         return null;
     }
 
+    @Override
+    public int gerarProximoId() {
+
+        if (usuarios.isEmpty()) {
+            return 1;
+        }
+
+        int maiorId = 0;
+
+        for (Usuario usuario : usuarios) {
+
+            if (usuario.getId() > maiorId) {
+                maiorId = usuario.getId();
+            }
+        }
+
+        return maiorId + 1;
+    }
+
 }

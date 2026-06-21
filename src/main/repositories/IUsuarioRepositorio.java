@@ -13,5 +13,7 @@ public interface IUsuarioRepositorio {
     public abstract Usuario buscarPorId(int id);
 
     public abstract Usuario buscarPorEmail(String email);
+
+    public abstract int gerarProximoId();
     
 }

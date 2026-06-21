@@ -83,7 +83,7 @@ public class MenuPrincipal {
         }
     }
 
-    private int lerInteiro() {
+    public int lerInteiro() {
         boolean valida = true;
         while (valida) {
 

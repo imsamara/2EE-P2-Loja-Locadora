@@ -88,11 +88,31 @@ public class Item {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status = status.toUpperCase();
     }
 
     public boolean estaDisponivel() {
         return status.equals("DISPONIVEL");
+    }
+
+    public boolean estaAlugado() {
+        return status.equals("ALUGADO");
+    }
+
+    public boolean estaEmManutencao() {
+        return status.equals("MANUTENCAO");
+    }
+
+    public void alugar() {
+        this.status = "ALUGADO";
+    }
+
+    public void devolver() {
+        this.status = "DISPONIVEL";
+    }
+
+    public void enviarParaManutencao() {
+        this.status = "MANUTENCAO";
     }
 
 }

@@ -10,7 +10,7 @@ public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
         this.salvaArquivo = salvaArquivo;
     }
 
-    private void salvarDados() {
+    public void salvarDados() {
         salvaArquivo.salvar(repositorio.listarTodos());
     }
 
@@ -98,23 +98,6 @@ public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
     }
     @Override
     public int gerarProximoId() {
-
-        List<Usuario> usuarios = repositorio.listarTodos();
-
-        if (usuarios.isEmpty()) {
-            return 1;
-        }
-
-        int maiorId = 0;
-
-        for (Usuario usuario : usuarios) {
-
-            if (usuario.getId() > maiorId) {
-                maiorId = usuario.getId();
-            }
-
-        }
-
-        return maiorId + 1;
+        return repositorio.gerarProximoId();
     }
 }

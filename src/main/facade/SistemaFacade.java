@@ -1,15 +1,18 @@
 import java.util.List;
 
 public class SistemaFacade {
+
     private IGerenciamentoUsuarios gerenciamentoUsuarios;
+    private IGerenciamentoContratos gerenciamentoContratos;
 
-//===============
-//Parte dos usuarios
-//===============
-
-    public SistemaFacade(IGerenciamentoUsuarios gerenciamentoUsuarios) {
+    public SistemaFacade(IGerenciamentoUsuarios gerenciamentoUsuarios, IGerenciamentoContratos gerenciamentoContratos) {
         this.gerenciamentoUsuarios = gerenciamentoUsuarios;
+        this.gerenciamentoContratos = gerenciamentoContratos;
     }
+
+    // =========================
+    // USUÁRIOS
+    // =========================
 
     public boolean cadastrarUsuario(Usuario usuario) {
         return gerenciamentoUsuarios.cadastrarUsuario(usuario);
@@ -35,9 +38,35 @@ public class SistemaFacade {
         return gerenciamentoUsuarios.realizarLogin(email, senha);
     }
 
-    public int gerarProximoId() {
+    public int gerarProximoIdUsuario() {
         return gerenciamentoUsuarios.gerarProximoId();
     }
-    //lembrar de alterar o construtor quando fizer as proximas coisas.
-    //colocar o resto das coisas aqui
+
+    // =========================
+    // CONTRATOS
+    // =========================
+
+    public boolean cadastrarContrato(ContratoAluguel contrato) {
+        return gerenciamentoContratos.cadastrarContrato(contrato);
+    }
+
+    public ContratoAluguel buscarContrato(int id) {
+        return gerenciamentoContratos.buscarContrato(id);
+    }
+
+    public List<ContratoAluguel> listarContratos() {
+        return gerenciamentoContratos.listarContratos();
+    }
+
+    public boolean finalizarContrato(int id) {
+        return gerenciamentoContratos.finalizarContrato(id);
+    }
+
+    public boolean cancelarContrato(int id) {
+        return gerenciamentoContratos.cancelarContrato(id);
+    }
+
+    public int gerarProximoIdContrato() {
+        return gerenciamentoContratos.gerarProximoId();
+    }
 }

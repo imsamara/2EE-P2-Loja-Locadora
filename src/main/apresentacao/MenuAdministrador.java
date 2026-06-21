@@ -20,12 +20,17 @@ public class MenuAdministrador {
         do {
 
             System.out.println("\n===== MENU ADMINISTRADOR =====");
+            System.out.println("Bem-vindo, " + administrador.getNome());
             System.out.println("1 - Cadastrar Funcionário");
             System.out.println("2 - Cadastrar Administrador");
             System.out.println("3 - Listar Usuários");
             System.out.println("4 - Buscar Usuário");
             System.out.println("5 - Atualizar Usuário");
             System.out.println("6 - Desativar Usuário");
+            System.out.println("7 - Buscar Contrato");
+            System.out.println("8 - Listar Contratos");
+            System.out.println("9 - Finalizar Contrato");
+            System.out.println("10 - Cancelar Contrato");
             System.out.println("0 - Sair");
             System.out.print("Opção: ");
 
@@ -57,6 +62,22 @@ public class MenuAdministrador {
                     desativarUsuario();
                     break;
 
+                case 7:
+                    buscarContrato();
+                    break;
+
+                case 8:
+                    listarContratos();
+                    break;
+
+                case 9:
+                    finalizarContrato();
+                    break;
+
+                case 10:
+                    cancelarContrato();
+                    break;
+
                 case 0:
                     System.out.println("Saindo...");
                     break;
@@ -72,7 +93,7 @@ public class MenuAdministrador {
 
         System.out.println("\n=== CADASTRAR FUNCIONÁRIO ===");
 
-        int id = sistema.gerarProximoId();
+        int id = sistema.gerarProximoIdUsuario();
 
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
@@ -104,7 +125,7 @@ public class MenuAdministrador {
 
         System.out.println("\n=== CADASTRAR ADMINISTRADOR ===");
 
-        int id = sistema.gerarProximoId();
+        int id = sistema.gerarProximoIdUsuario();
 
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
@@ -138,6 +159,13 @@ public class MenuAdministrador {
 
         System.out.println("\n===== USUÁRIOS =====");
 
+        if (usuarios.isEmpty()) {
+
+            System.out.println("Nenhum usuário cadastrado.");
+            //mesma coisa, perguntar a jackson a quebra de loop
+
+        }
+
         for (Usuario usuario : usuarios) {
 
             System.out.println("ID: " + usuario.getId() + " | Nome: " + usuario.getNome() + " | Email: " + usuario.getEmail() + " | Ativo: " + usuario.isAtivo());
@@ -170,7 +198,6 @@ public class MenuAdministrador {
     private void atualizarUsuario() {
 
         System.out.print("ID do usuário: ");
-
         int id = lerInteiro();
 
         System.out.print("Novo nome: ");
@@ -210,7 +237,85 @@ public class MenuAdministrador {
         }
     }
 
-    private int lerInteiro() {
+    private void buscarContrato() {
+
+        System.out.print("ID do contrato: ");
+
+        int id = lerInteiro();
+
+        ContratoAluguel contrato = sistema.buscarContrato(id);
+
+        if (contrato == null) {
+
+            System.out.println("Contrato não encontrado.");
+            return;
+
+        }
+
+        System.out.println("\n===== CONTRATO =====");
+        System.out.println("ID: " + contrato.getId());
+        System.out.println("Cliente: " + contrato.getCliente().getNome());
+        System.out.println("Item: " + contrato.getItem().getNome());
+        System.out.println("Status: " + contrato.getStatus());
+        System.out.println("Data retirada: " + contrato.getDataRetirada());
+        System.out.println("Data devolução prevista: " + contrato.getDataDevolucaoPrevista());
+        System.out.println("Valor total: R$ " + contrato.getValorTotal());
+    }
+
+    private void listarContratos() {
+
+        List<ContratoAluguel> contratos = sistema.listarContratos();
+
+        System.out.println("\n===== CONTRATOS =====");
+
+        if (contratos.isEmpty()) {
+
+            System.out.println("Nenhum contrato cadastrado.");
+            return;
+
+        }
+
+        for (ContratoAluguel contrato : contratos) {
+
+            System.out.println("ID: " + contrato.getId() + " | Cliente: " + contrato.getCliente().getNome() + " | Item: " + contrato.getItem().getNome() + " | Status: " + contrato.getStatus());
+        }
+    }
+
+    private void finalizarContrato() {
+
+        System.out.print("ID do contrato: ");
+
+        int id = lerInteiro();
+
+        if (sistema.finalizarContrato(id)) {
+
+            System.out.println("Contrato finalizado com sucesso.");
+
+        } else {
+
+            System.out.println("Contrato não encontrado.");
+
+        }
+    }
+
+    private void cancelarContrato() {
+
+        System.out.print("ID do contrato: ");
+
+        int id = lerInteiro();
+
+        if (sistema.cancelarContrato(id)) {
+
+            System.out.println("Contrato cancelado com sucesso.");
+
+        } else {
+
+            System.out.println("Contrato não encontrado.");
+
+        }
+    }
+
+    public int lerInteiro() {
         boolean valida = true;
         while (valida) {
 
@@ -218,9 +323,9 @@ public class MenuAdministrador {
 
                 int valor = Integer.parseInt(scanner.nextLine());
                 return valor;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
 
-                System.out.println("Digite apenas números.");
+                System.out.println("Digite apenas números: ");
                 scanner.nextLine();
 
             }

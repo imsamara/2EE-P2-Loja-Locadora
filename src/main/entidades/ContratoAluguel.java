@@ -12,16 +12,17 @@ public class ContratoAluguel {
     private boolean ativo;
     private double valorMulta;
 
-    public ContratoAluguel(int id, Cliente cliente, Item item, String dataRetirada, String dataDevolucaoPrevista, String dataDevolucaoReal, double valorTotal) {
+    public ContratoAluguel(int id, Cliente cliente, Item item, String dataRetirada, String dataDevolucaoPrevista, double valorTotal) {
         this.id = id;
         this.cliente = cliente;
         this.item = item;
         this.dataRetirada = dataRetirada;
         this.dataDevolucaoPrevista = dataDevolucaoPrevista;
-        this.dataDevolucaoReal = dataDevolucaoReal;
+        this.dataDevolucaoReal = "";
         this.valorTotal = valorTotal;
         this.status = "ATIVO";
         this.ativo = true;
+        this.valorMulta = 0.0;
     }
 
     public int getId() {
@@ -61,7 +62,7 @@ public class ContratoAluguel {
     public String getStatus() {
         return status;
     }
-    public boolean getAtivo() {
+    public boolean isAtivo() {
         return ativo;
     }
     public double getValorMulta() {
@@ -71,6 +72,26 @@ public class ContratoAluguel {
     public void setValorMulta(double valorMulta) {
         this.valorMulta = valorMulta;
     }
+
+     public boolean estaAtivo() {
+        return status.equals("ATIVO");
+    }
+
+    public boolean estaFinalizado() {
+        return status.equals("FINALIZADO");
+    }
+
+    public boolean estaCancelado() {
+        return status.equals("CANCELADO");
+    }
+
+    public boolean possuiMulta() {
+        if (valorMulta > 0){
+            return true;
+        }
+        return false;
+    }
+
 
     public void finalizarContrato() {
         this.status = "FINALIZADO";

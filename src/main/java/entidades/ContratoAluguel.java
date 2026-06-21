@@ -1,4 +1,4 @@
-
+package entidades;
 public class ContratoAluguel {
 
     private int id;

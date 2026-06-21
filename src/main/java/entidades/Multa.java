@@ -1,3 +1,5 @@
+package entidades;
+
 public class Multa {
 	private int idMulta;
 	private double valorMulta;

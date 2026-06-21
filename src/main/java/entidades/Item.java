@@ -1,3 +1,4 @@
+package entidades;
 public class Item {
 
     private int id;

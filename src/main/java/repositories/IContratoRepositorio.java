@@ -1,4 +1,7 @@
+package repositories;
 import java.util.List;
+
+import entidades.ContratoAluguel;
 
 public interface IContratoRepositorio {
 

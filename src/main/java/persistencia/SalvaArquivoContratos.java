@@ -1,8 +1,11 @@
+package persistencia;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
+import entidades.ContratoAluguel;
 
 public class SalvaArquivoContratos {
 
@@ -32,7 +35,7 @@ public class SalvaArquivoContratos {
 
             for (ContratoAluguel contrato : contratos) {
 
-                escritor.write(contrato.getId() + ";" + contrato.getCliente().getId() + ";" + contrato.getItem().getId() + ";" + contrato.getDataRetirada() + ";" + contrato.getDataDevolucaoPrevista() + ";" + contrato.getDataDevolucaoReal() + ";" + contrato.getValorTotal() + ";" + contrato.getStatus() + ";" + contrato.getAtivo() + ";" + contrato.getValorMulta());
+                escritor.write(contrato.getId() + ";" + contrato.getCliente().getId() + ";" + contrato.getItem().getId() + ";" + contrato.getDataRetirada() + ";" + contrato.getDataDevolucaoPrevista() + ";" + contrato.getDataDevolucaoReal() + ";" + contrato.getValorTotal() + ";" + contrato.getStatus() + ";" + contrato.isAtivo() + ";" + contrato.getValorMulta());
 
                 escritor.newLine();
             }

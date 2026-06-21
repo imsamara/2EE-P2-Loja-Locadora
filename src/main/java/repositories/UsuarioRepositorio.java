@@ -1,5 +1,9 @@
+package repositories;
 import java.util.ArrayList;
 import java.util.List;
+
+import entidades.Usuario;
+import persistencia.LeArquivoUsuarios;
 
 public class UsuarioRepositorio implements IUsuarioRepositorio {
 

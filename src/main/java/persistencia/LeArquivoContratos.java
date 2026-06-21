@@ -1,8 +1,11 @@
+package persistencia;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import repositories.*;
+import entidades.*;
 
 public class LeArquivoContratos {
 
@@ -50,7 +53,7 @@ public class LeArquivoContratos {
 
                 double valorTotal = Double.parseDouble(dados[6]);
 
-                ContratoAluguel contrato = new ContratoAluguel(id, cliente, item, dataRetirada, dataPrevista, dataReal, valorTotal);
+                ContratoAluguel contrato = new ContratoAluguel(id, cliente, item, dataRetirada, dataPrevista, valorTotal);
 
                 if (dados.length > 9) {
                     contrato.setValorMulta(Double.parseDouble(dados[9]));

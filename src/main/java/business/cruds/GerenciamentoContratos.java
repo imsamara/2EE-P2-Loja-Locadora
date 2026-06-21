@@ -1,4 +1,10 @@
+package business.cruds;
 import java.util.List;
+
+import business.interfaces.IGerenciamentoContratos;
+import entidades.ContratoAluguel;
+import persistencia.SalvaArquivoContratos;
+import repositories.IContratoRepositorio;
 
 public class GerenciamentoContratos implements IGerenciamentoContratos {
 

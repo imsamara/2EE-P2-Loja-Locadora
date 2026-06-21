@@ -1,6 +1,12 @@
+package apresentacao;
 import java.util.List;
 import java.util.Scanner;
 
+import entidades.Administrador;
+import entidades.ContratoAluguel;
+import entidades.Funcionario;
+import entidades.Usuario;
+import facade.SistemaFacade;
 public class MenuAdministrador {
 
     private SistemaFacade sistema;

@@ -1,6 +1,8 @@
+package repositories;
 import java.util.ArrayList;
 import java.util.List;
-
+import entidades.*;
+import persistencia.LeArquivoContratos;
 public class ContratoRepositorio implements IContratoRepositorio {
 
     private List<ContratoAluguel> contratos;

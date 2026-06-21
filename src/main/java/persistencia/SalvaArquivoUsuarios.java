@@ -1,9 +1,11 @@
+package persistencia;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import entidades.Usuario;
 public class SalvaArquivoUsuarios {
 
     private String pasta;

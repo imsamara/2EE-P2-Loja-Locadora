@@ -1,3 +1,4 @@
+package persistencia;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -5,6 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import entidades.Administrador;
+import entidades.Cliente;
+import entidades.Funcionario;
+import entidades.Usuario;
 public class LeArquivoUsuarios {
 
     private String pasta;

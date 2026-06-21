@@ -1,5 +1,10 @@
+package business.cruds;
 import java.util.List;
 
+import business.interfaces.IGerenciamentoUsuarios;
+import entidades.Usuario;
+import persistencia.SalvaArquivoUsuarios;
+import repositories.IUsuarioRepositorio;
 public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
 
     private IUsuarioRepositorio repositorio;

@@ -1,6 +1,10 @@
+package apresentacao;
 import java.util.List;
 import java.util.Scanner;
 
+import entidades.Cliente;
+import entidades.ContratoAluguel;
+import facade.SistemaFacade;
 public class MenuCliente {
 
     private SistemaFacade sistema;

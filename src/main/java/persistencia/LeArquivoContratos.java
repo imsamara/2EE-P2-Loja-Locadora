@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import repositories.*;
-import entidades.*;
+
+import entidades.Cliente;
+import entidades.ContratoAluguel;
+import entidades.Item;
+import repositories.IItemRepositorio;
+import repositories.IUsuarioRepositorio;
 
 public class LeArquivoContratos {
 
@@ -26,7 +30,6 @@ public class LeArquivoContratos {
         File arquivo = new File(pasta, "contratos.csv");
 
         if (!arquivo.exists()) {
-
             return contratos;
 
         }
@@ -75,7 +78,7 @@ public class LeArquivoContratos {
 
         } catch (Exception e) {
 
-            System.out.println("Erro ao carregar contratos.");
+            System.out.println("Erro ao carregar contratos");
 
         }
 

@@ -1,10 +1,13 @@
 package apresentacao;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Scanner;
 
 import entidades.Administrador;
 import entidades.ContratoAluguel;
 import entidades.Funcionario;
+import entidades.Item;
 import entidades.Usuario;
 import facade.SistemaFacade;
 public class MenuAdministrador {
@@ -27,16 +30,28 @@ public class MenuAdministrador {
 
             System.out.println("\n===== MENU ADMINISTRADOR =====");
             System.out.println("Bem-vindo, " + administrador.getNome());
+
+            System.out.println("========== USUÁRIOS ==========");
             System.out.println("1 - Cadastrar Funcionário");
             System.out.println("2 - Cadastrar Administrador");
             System.out.println("3 - Listar Usuários");
             System.out.println("4 - Buscar Usuário");
             System.out.println("5 - Atualizar Usuário");
             System.out.println("6 - Desativar Usuário");
-            System.out.println("7 - Buscar Contrato");
-            System.out.println("8 - Listar Contratos");
-            System.out.println("9 - Finalizar Contrato");
-            System.out.println("10 - Cancelar Contrato");
+
+            System.out.println("=========== ITENS ============");
+            System.out.println("7 - Cadastrar Item");
+            System.out.println("8 - Buscar Item");
+            System.out.println("9 - Listar Itens");
+            System.out.println("10 - Atualizar Item");
+            System.out.println("11 - Desativar Item");
+
+            System.out.println("========= CONTRATOS ==========");
+            System.out.println("12 - Buscar Contrato");
+            System.out.println("13 - Listar Contratos");
+            System.out.println("14 - Finalizar Contrato");
+            System.out.println("15 - Cancelar Contrato");
+
             System.out.println("0 - Sair");
             System.out.print("Opção: ");
 
@@ -69,18 +84,38 @@ public class MenuAdministrador {
                     break;
 
                 case 7:
-                    buscarContrato();
+                    cadastrarItem();
                     break;
 
                 case 8:
-                    listarContratos();
+                    buscarItem();
                     break;
 
                 case 9:
-                    finalizarContrato();
+                    listarItens();
                     break;
 
                 case 10:
+                    atualizarItem();
+                    break;
+
+                case 11:
+                    desativarItem();
+                    break;
+
+                case 12:
+                    buscarContrato();
+                    break;
+
+                case 13:
+                    listarContratos();
+                    break;
+
+                case 14:
+                    finalizarContrato();
+                    break;
+
+                case 15:
                     cancelarContrato();
                     break;
 
@@ -234,11 +269,11 @@ public class MenuAdministrador {
 
         if (sistema.excluirUsuario(id)) {
 
-            System.out.println("Usuário desativado.");
+            System.out.println("Usuário desativado");
 
         } else {
 
-            System.out.println("Usuário não encontrado.");
+            System.out.println("Usuário não encontrado");
 
         }
     }
@@ -287,36 +322,95 @@ public class MenuAdministrador {
         }
     }
 
-    private void finalizarContrato() {
+    public void finalizarContrato() {
 
         System.out.print("ID do contrato: ");
 
         int id = lerInteiro();
 
+        ContratoAluguel contrato = sistema.buscarContrato(id);
+
+        if (contrato == null) {
+
+            System.out.println("Contrato não encontrado");
+            //finalizar o fluxo aqui com o return; perguntar a jackson
+
+        }
+
+        System.out.print("Data real da devolução (AAAA-MM-DD): ");
+
+        String dataDevolucaoReal = scanner.nextLine();
+
+        LocalDate dataPrevista;
+        LocalDate dataReal;
+
+        try {
+
+            dataPrevista = LocalDate.parse(contrato.getDataDevolucaoPrevista());
+            dataReal = LocalDate.parse(dataDevolucaoReal);
+
+        } catch (Exception e) {
+
+            System.out.println("Formato de data inválido");
+            return; //dar a quebra do fluxo perguntar pra jackson se pode fazer isso
+
+
+        }
+
+        contrato.setDataDevolucaoReal(dataDevolucaoReal);
+
+        long diasAtraso = ChronoUnit.DAYS.between(dataPrevista, dataReal);
+
+        if (diasAtraso > 0) {
+
+            double multa = diasAtraso * contrato.getItem().getTaxaDiaria();
+
+            contrato.setValorMulta(multa);
+
+            System.out.println("Dias de atraso: " + diasAtraso);
+            System.out.println("Multa aplicada: R$ " + multa);
+
+        }
+
+        contrato.getItem().devolver();
+
         if (sistema.finalizarContrato(id)) {
 
-            System.out.println("Contrato finalizado com sucesso.");
+            System.out.println("Contrato finalizado com sucesso");
+            System.out.println("Item devolvido ao estoque");
 
         } else {
 
-            System.out.println("Contrato não encontrado.");
+            System.out.println("Erro ao finalizar contrato");
 
         }
     }
 
-    private void cancelarContrato() {
+    public void cancelarContrato() {
 
         System.out.print("ID do contrato: ");
 
         int id = lerInteiro();
 
-        if (sistema.cancelarContrato(id)) {
+        ContratoAluguel contrato = sistema.buscarContrato(id);
 
-            System.out.println("Contrato cancelado com sucesso.");
+        if (contrato == null) {
+
+            System.out.println("Contrato não encontrado");
+            return;//perguntar se pode usar o return;
+
+        }
+
+
+        if (sistema.cancelarContrato(id)) {
+            contrato.getItem().devolver();
+
+            System.out.println("Contrato cancelado com sucesso");
+            System.out.println("Item devolvido ao estoque");
 
         } else {
 
-            System.out.println("Contrato não encontrado.");
+            System.out.println("Erro ao cancelar contrato");
 
         }
     }
@@ -337,5 +431,130 @@ public class MenuAdministrador {
             }
         }
         return -1;
+    }
+    public void cadastrarItem() {
+
+        System.out.println("\n=== CADASTRAR ITEM ===");
+
+        int id = sistema.gerarProximoIdItem();
+
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Descrição: ");
+        String descricao = scanner.nextLine();
+
+        System.out.print("Taxa diária: ");
+        double taxaDiaria = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Estado de conservação: ");
+        String estado = scanner.nextLine().toUpperCase();
+
+        System.out.print("Valor de reposição: ");
+        double valorReposicao = Double.parseDouble(scanner.nextLine());
+        //Ajustar aqui quando tiver pronto categoria e fornecedor
+        Item item = new Item(id, nome, descricao, taxaDiaria, estado, valorReposicao, null, null);
+
+        if (sistema.cadastrarItem(item)) {
+
+            System.out.println("Item cadastrado com sucesso");
+            System.out.println("ID gerado: " + id);
+
+        } else {
+
+            System.out.println("Erro ao cadastrar item");
+
+        }
+    }
+    public void buscarItem() {
+
+        System.out.print("ID do item: ");
+
+        int id = lerInteiro();
+
+        Item item = sistema.buscarItem(id);
+
+        if (item == null) {
+
+            System.out.println("Item não encontrado");
+            return;
+
+        }
+
+        System.out.println("\n===== ITEM =====");
+        System.out.println("ID: " + item.getId());
+        System.out.println("Nome: " + item.getNome());
+        System.out.println("Descrição: " + item.getDescricao());
+        System.out.println("Taxa diária: " + item.getTaxaDiaria());
+        System.out.println("Estado: " + item.getEstadoConservacao());
+        System.out.println("Status: " + item.getStatus());
+    }
+    public void listarItens() {
+
+        List<Item> itens = sistema.listarItens();
+
+        System.out.println("\n===== ITENS =====");
+
+        if (itens.isEmpty()) {
+
+            System.out.println("Nenhum item cadastrado");
+            //quebra de loop colocar aq 
+
+        }
+
+        for (Item item : itens) {
+
+            System.out.println("ID: " + item.getId()
+                    + " | Nome: " + item.getNome()
+                    + " | Status: " + item.getStatus()
+                    + " | Ativo: " + item.isAtivo());
+        }
+    }
+    public void atualizarItem() {
+
+        System.out.print("ID do item: ");
+
+        int id = lerInteiro();
+
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Descrição: ");
+        String descricao = scanner.nextLine();
+
+        System.out.print("Taxa diária: ");
+        double taxaDiaria = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Estado de conservação: ");
+        String estado = scanner.nextLine().toUpperCase();
+
+        System.out.print("Valor de reposição: ");
+        double valorReposicao = Double.parseDouble(scanner.nextLine());
+
+        if (sistema.atualizarItem(id, nome, descricao, taxaDiaria, estado, valorReposicao)) {
+
+            System.out.println("Item atualizado com sucesso");
+
+        } else {
+
+            System.out.println("Item não encontrado");
+
+        }
+    }
+    public void desativarItem() {
+
+        System.out.print("ID do item: ");
+
+        int id = lerInteiro();
+
+        if (sistema.excluirItem(id)) {
+
+            System.out.println("Item desativado com sucesso");
+
+        } else {
+
+            System.out.println("Item não encontrado");
+
+        }
     }
 }

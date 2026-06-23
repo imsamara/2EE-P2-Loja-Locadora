@@ -20,8 +20,7 @@ public class SalvaArquivoUsuarios {
 
             if (pastaVazia.mkdirs()) {
 
-                System.out.println(
-                        "Pasta " + pasta + " criada.");
+                System.out.println("Pasta " + pasta + " criada");
 
             }
         }
@@ -39,7 +38,7 @@ public class SalvaArquivoUsuarios {
                 escritor.newLine();
             }
 
-            System.out.println("Usuários salvos com sucesso.");
+            System.out.println("Usuários salvos com sucesso");
 
         } catch (IOException e) {
 

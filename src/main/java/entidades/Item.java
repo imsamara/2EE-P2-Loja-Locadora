@@ -1,4 +1,5 @@
 package entidades;
+
 public class Item {
 
     private int id;
@@ -10,8 +11,11 @@ public class Item {
     private Categoria categoria;
     private Fornecedor fornecedor;
     private String status;
+    private boolean ativo;
 
-    public Item(int id, String nome, String descricao, double taxaDiaria, String estadoConservacao, double valorReposicao, Categoria categoria, Fornecedor fornecedor) {
+    public Item(int id, String nome, String descricao, double taxaDiaria,
+                String estadoConservacao, double valorReposicao,
+                Categoria categoria, Fornecedor fornecedor) {
 
         this.id = id;
         this.nome = nome;
@@ -22,6 +26,7 @@ public class Item {
         this.categoria = categoria;
         this.fornecedor = fornecedor;
         this.status = "DISPONIVEL";
+        this.ativo = true;
     }
 
     public int getId() {
@@ -92,8 +97,23 @@ public class Item {
         this.status = status.toUpperCase();
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public void desativar() {
+        this.ativo = false;
+    }
+
     public boolean estaDisponivel() {
-        return status.equals("DISPONIVEL");
+        if (ativo && status.equals("DISPONIVEL")){
+            return true;
+        }
+        return false;
     }
 
     public boolean estaAlugado() {
@@ -115,5 +135,4 @@ public class Item {
     public void enviarParaManutencao() {
         this.status = "MANUTENCAO";
     }
-
 }

@@ -1,17 +1,25 @@
 package facade;
+
 import java.util.List;
-import business.interfaces.*;
-import business.cruds.*;
-import entidades.*;
-import repositories.*;
+
+import business.interfaces.IGerenciamentoContratos;
+import business.interfaces.IGerenciamentoItens;
+import business.interfaces.IGerenciamentoUsuarios;
+import entidades.ContratoAluguel;
+import entidades.Item;
+import entidades.Usuario;
+
 public class SistemaFacade {
 
     private IGerenciamentoUsuarios gerenciamentoUsuarios;
     private IGerenciamentoContratos gerenciamentoContratos;
+    private IGerenciamentoItens gerenciamentoItens;
 
-    public SistemaFacade(IGerenciamentoUsuarios gerenciamentoUsuarios, IGerenciamentoContratos gerenciamentoContratos) {
+    public SistemaFacade(IGerenciamentoUsuarios gerenciamentoUsuarios, IGerenciamentoContratos gerenciamentoContratos, IGerenciamentoItens gerenciamentoItens) {
+
         this.gerenciamentoUsuarios = gerenciamentoUsuarios;
         this.gerenciamentoContratos = gerenciamentoContratos;
+        this.gerenciamentoItens = gerenciamentoItens;
     }
 
     // =========================
@@ -72,5 +80,33 @@ public class SistemaFacade {
 
     public int gerarProximoIdContrato() {
         return gerenciamentoContratos.gerarProximoId();
+    }
+
+    // =========================
+    // ITENS
+    // =========================
+
+    public boolean cadastrarItem(Item item) {
+        return gerenciamentoItens.cadastrarItem(item);
+    }
+
+    public Item buscarItem(int id) {
+        return gerenciamentoItens.buscarItem(id);
+    }
+
+    public List<Item> listarItens() {
+        return gerenciamentoItens.listarItens();
+    }
+
+    public boolean atualizarItem(int id, String nome, String descricao, double taxaDiaria, String estadoConservacao, double valorReposicao) {
+        return gerenciamentoItens.atualizarItem(id, nome, descricao, taxaDiaria, estadoConservacao, valorReposicao);
+    }
+
+    public boolean excluirItem(int id) {
+        return gerenciamentoItens.excluirItem(id);
+    }
+
+    public int gerarProximoIdItem() {
+        return gerenciamentoItens.gerarProximoId();
     }
 }

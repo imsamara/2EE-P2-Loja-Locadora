@@ -26,7 +26,7 @@ public class LeArquivoUsuarios {
 
         if (!caminhoCompleto.exists()) {
 
-            System.out.println("Arquivo de usuários não encontrado.");
+            System.out.println("Arquivo de usuários não encontrado");
 
             return usuarios;
         }

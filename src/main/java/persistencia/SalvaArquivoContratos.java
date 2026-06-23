@@ -21,7 +21,7 @@ public class SalvaArquivoContratos {
 
             if (pastaVazia.mkdirs()) {
 
-                System.out.println("Pasta '" + pasta + "' criada.");
+                System.out.println("Pasta '" + pasta + "' criada");
 
             }
         }
@@ -42,7 +42,7 @@ public class SalvaArquivoContratos {
 
         } catch (IOException e) {
 
-            System.out.println("Erro ao salvar contratos.");
+            System.out.println("Erro ao salvar contratos");
 
         }
     }

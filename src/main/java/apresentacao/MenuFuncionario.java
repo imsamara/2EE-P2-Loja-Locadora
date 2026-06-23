@@ -173,7 +173,7 @@ public class MenuFuncionario {
         if (usuario == null || !(usuario instanceof Cliente)) {
 
             System.out.println("Cliente não encontrado.");
-            return;
+            return; //VER SE PODE USAR O RETURN;
 
         }
 
@@ -187,14 +187,14 @@ public class MenuFuncionario {
         if (item == null) {
 
             System.out.println("Item não encontrado.");
-            return;
+            return; //VER SE PODE USAR O RETURN;
 
         }
 
         if (!item.estaDisponivel()) {
 
             System.out.println("Item indisponível para aluguel.");
-            return;
+            return; //VER SE PODE USAR O RETURN;
 
         }
 
@@ -311,6 +311,12 @@ public class MenuFuncionario {
             //finalizar o fluxo aqui com o return; perguntar a jackson
 
         }
+        if (!contrato.estaAtivo()) {
+
+            System.out.println("Este contrato já foi encerrado.");
+            return; //ver se pode usar o return;
+
+        }
 
         System.out.print("Data real da devolução (AAAA-MM-DD): ");
 
@@ -338,18 +344,26 @@ public class MenuFuncionario {
 
         if (diasAtraso > 0) {
 
-            double multa = diasAtraso * contrato.getItem().getTaxaDiaria();
+            double multaFixa = 10.0;
+
+            double multaPercentual =
+                    diasAtraso *
+                    (contrato.getItem().getTaxaDiaria() * 0.05);
+
+            double multa = multaFixa + multaPercentual;
 
             contrato.setValorMulta(multa);
 
             System.out.println("Dias de atraso: " + diasAtraso);
-            System.out.println("Multa aplicada: R$ " + multa);
+            System.out.println("Multa fixa: R$ " + multaFixa);
+            System.out.println("Multa percentual: R$ " + multaPercentual);
+            System.out.println("Multa total: R$ " + multa);
 
         }
 
-        contrato.getItem().devolver();
-
         if (sistema.finalizarContrato(id)) {
+            
+            contrato.getItem().devolver();
 
             System.out.println("Contrato finalizado com sucesso");
             System.out.println("Item devolvido ao estoque");

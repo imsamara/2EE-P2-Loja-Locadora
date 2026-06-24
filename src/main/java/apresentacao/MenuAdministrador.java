@@ -557,4 +557,74 @@ public class MenuAdministrador {
 
         }
     }
+    public void menuRelatorios() {
+
+        int opcao;
+
+        do {
+
+            System.out.println("\n===== RELATÓRIOS =====");
+            System.out.println("1 - Itens disponíveis por categoria");
+            System.out.println("2 - Histórico de aluguéis por cliente");
+            System.out.println("3 - Itens alugados atualmente");
+            System.out.println("4 - Relatório de faturamento");
+            System.out.println("0 - Voltar");
+            System.out.print("Opção: ");
+
+            opcao = lerInteiro();
+
+            switch (opcao) {
+
+                case 1:
+
+                    sistema.gerarRelatorioItensDisponiveis();
+                    System.out.println("Relatório gerado com sucesso");
+                    break;
+
+                case 2:
+
+                    System.out.print("ID do cliente: ");
+                    int idCliente = lerInteiro();
+
+                    sistema.gerarHistoricoCliente(idCliente);
+
+                    System.out.println("Relatório gerado com sucesso");
+                    break;
+
+                case 3:
+
+                    sistema.gerarRelatorioItensAlugados();
+
+                    System.out.println("Relatório gerado com sucesso");
+                    break;
+
+                case 4:
+
+                    System.out.print("Data inicial (AAAA-MM-DD): ");
+                    String dataInicial = scanner.nextLine();
+
+                    System.out.print("Data final (AAAA-MM-DD): ");
+                    String dataFinal = scanner.nextLine();
+
+                    sistema.gerarRelatorioFaturamento(
+                            dataInicial,
+                            dataFinal);
+
+                    System.out.println("Relatório gerado com sucesso");
+                    break;
+
+                case 0:
+
+                    System.out.println("Retornando...");
+                    break;
+
+                default:
+
+                    System.out.println("Opção inválida");
+
+            }
+
+        } while (opcao != 0);
+
+    }
 }

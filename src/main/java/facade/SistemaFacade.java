@@ -5,6 +5,7 @@ import java.util.List;
 import business.interfaces.IGerenciamentoContratos;
 import business.interfaces.IGerenciamentoItens;
 import business.interfaces.IGerenciamentoUsuarios;
+import business.relatorios.IRelatorios;
 import entidades.ContratoAluguel;
 import entidades.Item;
 import entidades.Usuario;
@@ -15,11 +16,17 @@ public class SistemaFacade {
     private IGerenciamentoContratos gerenciamentoContratos;
     private IGerenciamentoItens gerenciamentoItens;
 
-    public SistemaFacade(IGerenciamentoUsuarios gerenciamentoUsuarios, IGerenciamentoContratos gerenciamentoContratos, IGerenciamentoItens gerenciamentoItens) {
+
+
+
+    private IRelatorios geradorRelatorios;
+
+    public SistemaFacade(IGerenciamentoUsuarios gerenciamentoUsuarios, IGerenciamentoContratos gerenciamentoContratos, IGerenciamentoItens gerenciamentoItens, IRelatorios geradorRelatorios) {
 
         this.gerenciamentoUsuarios = gerenciamentoUsuarios;
         this.gerenciamentoContratos = gerenciamentoContratos;
         this.gerenciamentoItens = gerenciamentoItens;
+        this.geradorRelatorios = geradorRelatorios;
     }
 
     // =========================
@@ -108,5 +115,24 @@ public class SistemaFacade {
 
     public int gerarProximoIdItem() {
         return gerenciamentoItens.gerarProximoId();
+    }
+
+    // =========================
+    // Relatórios
+    // =========================
+    
+    public void gerarRelatorioItensDisponiveis() {
+        geradorRelatorios.gerarRelatorioItensDisponiveis();
+    }
+    public void gerarHistoricoCliente(int idCliente) {
+        geradorRelatorios.gerarHistoricoCliente(idCliente);
+    }
+
+    public void gerarRelatorioItensAlugados() {
+        geradorRelatorios.gerarRelatorioItensAlugados();
+    }
+
+    public void gerarRelatorioFaturamento(String dataInicial, String dataFinal) {
+        geradorRelatorios.gerarRelatorioFaturamento(dataInicial, dataFinal);
     }
 }

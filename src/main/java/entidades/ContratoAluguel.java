@@ -11,6 +11,7 @@ public class ContratoAluguel {
     private String status;
     private boolean ativo;
     private double valorMulta;
+    private boolean multaPaga;
 
     public ContratoAluguel(int id, Cliente cliente, Item item, String dataRetirada, String dataDevolucaoPrevista, double valorTotal) {
         this.id = id;
@@ -23,6 +24,7 @@ public class ContratoAluguel {
         this.status = "ATIVO";
         this.ativo = true;
         this.valorMulta = 0.0;
+        this.multaPaga = true;
     }
 
     public int getId() {
@@ -71,6 +73,13 @@ public class ContratoAluguel {
 
     public void setValorMulta(double valorMulta) {
         this.valorMulta = valorMulta;
+    }
+    public boolean isMultaPaga() {
+    return multaPaga;
+    }
+
+    public void setMultaPaga(boolean multaPaga) {
+        this.multaPaga = multaPaga;
     }
 
      public boolean estaAtivo() {

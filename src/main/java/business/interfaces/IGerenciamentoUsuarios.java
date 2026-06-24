@@ -13,7 +13,7 @@ public interface IGerenciamentoUsuarios {
 
     public abstract boolean atualizarUsuario(int id, String nome, String email, String senha);
 
-    public abstract boolean excluirUsuario(int id);
+    public abstract boolean desativaUsuario(int id);
 
     public abstract Usuario realizarLogin(String email, String senha);
     

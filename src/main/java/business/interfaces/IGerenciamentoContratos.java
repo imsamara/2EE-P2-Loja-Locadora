@@ -17,4 +17,8 @@ public interface IGerenciamentoContratos {
 
     public abstract int gerarProximoId();
 
+    public boolean clientePossuiMultaPendente(int idCliente);
+
+    public boolean clientePossuiHistorico(int idCliente);
+
 }

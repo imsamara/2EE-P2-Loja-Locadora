@@ -76,7 +76,7 @@ public class GerenciamentoContratos implements IGerenciamentoContratos {
         }
 
         contrato.finalizarContrato();
-
+        
         salvarDados();
 
         return true;
@@ -98,5 +98,37 @@ public class GerenciamentoContratos implements IGerenciamentoContratos {
 
         return true;
     }
+    
+    @Override
+    public boolean clientePossuiMultaPendente(int idCliente) {
+
+        for (ContratoAluguel contrato : repositorio.listarTodos()) {
+
+            if (contrato.getCliente().getId() == idCliente && contrato.getValorMulta() > 0 &&!contrato.isMultaPaga()) {
+
+                return true;
+
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean clientePossuiHistorico(int idCliente) {
+
+    for (ContratoAluguel contrato : repositorio.listarTodos()) {
+
+        if (contrato.getCliente().getId() == idCliente) {
+
+            return true;
+
+        }
+
+    }
+
+    return false;
+
+}
 
 }

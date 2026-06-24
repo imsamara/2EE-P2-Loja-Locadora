@@ -267,7 +267,7 @@ public class MenuAdministrador {
 
         int id = lerInteiro();
 
-        if (sistema.excluirUsuario(id)) {
+        if (sistema.desativaUsuario(id)) {
 
             System.out.println("Usuário desativado");
 
@@ -303,7 +303,7 @@ public class MenuAdministrador {
         System.out.println("Valor total: R$ " + contrato.getValorTotal());
     }
 
-    private void listarContratos() {
+    public void listarContratos() {
 
         List<ContratoAluguel> contratos = sistema.listarContratos();
 
@@ -333,7 +333,7 @@ public class MenuAdministrador {
         if (contrato == null) {
 
             System.out.println("Contrato não encontrado");
-            //finalizar o fluxo aqui com o return; perguntar a jackson
+            return; //perguntar se pode
 
         }
 
@@ -347,28 +347,42 @@ public class MenuAdministrador {
         try {
 
             dataPrevista = LocalDate.parse(contrato.getDataDevolucaoPrevista());
+
             dataReal = LocalDate.parse(dataDevolucaoReal);
 
         } catch (Exception e) {
 
             System.out.println("Formato de data inválido");
-            return; //dar a quebra do fluxo perguntar pra jackson se pode fazer isso
-
+            return; //perguntar se pode
 
         }
 
         contrato.setDataDevolucaoReal(dataDevolucaoReal);
 
-        long diasAtraso = ChronoUnit.DAYS.between(dataPrevista, dataReal);
+        long diasAtraso =
+                ChronoUnit.DAYS.between(dataPrevista,dataReal);
 
         if (diasAtraso > 0) {
 
-            double multa = diasAtraso * contrato.getItem().getTaxaDiaria();
+            double multaFixa = 10.0;
+
+            double multaPercentual =
+                    diasAtraso * (contrato.getItem().getTaxaDiaria() * 0.05);
+
+            double multa =multaFixa + multaPercentual;
 
             contrato.setValorMulta(multa);
 
+            
+            contrato.setMultaPaga(false);
+
             System.out.println("Dias de atraso: " + diasAtraso);
-            System.out.println("Multa aplicada: R$ " + multa);
+
+            System.out.println("Multa fixa: R$ " + multaFixa);
+
+            System.out.println("Multa percentual: R$ "+ multaPercentual);
+
+            System.out.println("Multa total: R$ " + multa);
 
         }
 
@@ -377,13 +391,15 @@ public class MenuAdministrador {
         if (sistema.finalizarContrato(id)) {
 
             System.out.println("Contrato finalizado com sucesso");
-            System.out.println("Item devolvido ao estoque");
+
+            System.out.println( "Item devolvido ao estoque");
 
         } else {
 
             System.out.println("Erro ao finalizar contrato");
 
         }
+
     }
 
     public void cancelarContrato() {

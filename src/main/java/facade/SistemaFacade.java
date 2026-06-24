@@ -49,8 +49,8 @@ public class SistemaFacade {
         return gerenciamentoUsuarios.atualizarUsuario(id, nome, email, senha);
     }
 
-    public boolean excluirUsuario(int id) {
-        return gerenciamentoUsuarios.excluirUsuario(id);
+    public boolean desativaUsuario(int id) {
+        return gerenciamentoUsuarios.desativaUsuario(id);
     }
 
     public Usuario realizarLogin(String email, String senha) {
@@ -87,6 +87,15 @@ public class SistemaFacade {
 
     public int gerarProximoIdContrato() {
         return gerenciamentoContratos.gerarProximoId();
+    }
+    public boolean clientePossuiMultaPendente(int idCliente) {
+        return gerenciamentoContratos.clientePossuiMultaPendente(idCliente);
+
+    }
+    public boolean clientePossuiHistorico(int idCliente) {
+
+        return gerenciamentoContratos.clientePossuiHistorico(idCliente);
+
     }
 
     // =========================

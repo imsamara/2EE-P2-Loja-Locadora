@@ -26,7 +26,7 @@ public class SalvaArquivoFornecedor {
 
         try(BufferedWriter escritor = new BufferedWriter(new FileWriter(caminhoCompleto))){
             for (Fornecedor fornecedor  : fornecedores){
-                escritor.write(fornecedor.getId() + ";" + fornecedor.getRazaoSocial() + ";" + fornecedor.getCnpj() + ";" + fornecedor.getEmail() + ";" + fornecedor.getTelefone() + ";" + fornecedor.getStatusAtivo());
+                escritor.write(fornecedor.getId() + ";" + fornecedor.getRazaoSocial() + ";" + fornecedor.getCnpj() + ";" + fornecedor.getEmail() + ";" + fornecedor.getTelefone() + ";" + fornecedor.estaDisponivel());
                 escritor.newLine();
             }
 

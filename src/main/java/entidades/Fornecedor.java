@@ -15,7 +15,7 @@ public class Fornecedor {
         this.cnpj = cnpj;
         this.email = email;
         this.telefone = telefone;
-        this.statusAtivo = statusAtivo;
+        this.statusAtivo = true;
 
     }
 
@@ -59,12 +59,16 @@ public class Fornecedor {
         this.telefone = telefone;
     }
 
-    public boolean getStatusAtivo() {
-        return statusAtivo;
+
+    public void desativar() {
+        this.statusAtivo = false;
     }
 
-    public void setStatusAtivo(boolean statusAtivo) {
-        this.statusAtivo = statusAtivo;
+    public void ativar() {
+        this.statusAtivo = true;
+    }
+    public boolean estaDisponivel() {
+        return statusAtivo;
     }
 
     

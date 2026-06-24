@@ -35,18 +35,10 @@ public class FornecedorRepositorio implements IFornecedorRepositorio {
         Fornecedor fornecedor = buscarPorId(id);
 
         if (fornecedor != null){
-            fornecedor.setStatusAtivo(false);
+            fornecedor.desativar();
         }
     }
 
-    @Override
-    public void excluir(int id){
-        Fornecedor fornecedor = buscarPorId(id);
-
-        if (fornecedor != null){
-            fornecedores.remove(fornecedor);
-        }
-    }
 
     @Override
     public Fornecedor buscarPorCnpj(String cnpj){

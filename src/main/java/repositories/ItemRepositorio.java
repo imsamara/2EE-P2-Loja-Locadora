@@ -1,9 +1,9 @@
 package repositories;
 
+import java.util.List;
+
 import entidades.Item;
 import persistencia.LeArquivoItens;
-
-import java.util.List;
 
 public class ItemRepositorio implements IItemRepositorio {
 

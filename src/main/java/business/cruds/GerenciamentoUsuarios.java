@@ -1,7 +1,7 @@
 package business.cruds;
 import java.util.List;
 
-import business.interfaces.IGerenciamentoContratos;
+
 import business.interfaces.IGerenciamentoUsuarios;
 import entidades.Usuario;
 import persistencia.SalvaArquivoUsuarios;
@@ -10,12 +10,10 @@ public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
 
     private IUsuarioRepositorio repositorio;
     private SalvaArquivoUsuarios salvaArquivo;
-    private IGerenciamentoContratos gerenciamentoContratos;
 
-    public GerenciamentoUsuarios(IUsuarioRepositorio repositorio, SalvaArquivoUsuarios salvaArquivo, IGerenciamentoContratos gerenciamentoContratos) {
+    public GerenciamentoUsuarios(IUsuarioRepositorio repositorio, SalvaArquivoUsuarios salvaArquivo) {
         this.repositorio = repositorio;
         this.salvaArquivo = salvaArquivo;
-        this.gerenciamentoContratos = gerenciamentoContratos;
     }
 
     public void salvarDados() {
@@ -73,31 +71,16 @@ public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
     }
 
     @Override
-    public boolean desativaUsuario(int id) {
+    public boolean excluirUsuario(int id) {
 
         Usuario usuario = repositorio.buscarPorId(id);
 
         if (usuario == null) {
-
             return false;
-
         }
-
-        if (gerenciamentoContratos.clientePossuiMultaPendente(id)) {
-
-            System.out.println(
-                    "Usuário possui multas pendentes.");
-
-            return false;
-
-        }
-
         usuario.setAtivo(false);
-
         salvarDados();
-
         return true;
-
     }
 
     @Override

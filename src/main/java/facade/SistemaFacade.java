@@ -2,10 +2,12 @@ package facade;
 
 import java.util.List;
 
+import business.interfaces.IGerenciamentoCategoria;
 import business.interfaces.IGerenciamentoContratos;
 import business.interfaces.IGerenciamentoItens;
 import business.interfaces.IGerenciamentoUsuarios;
 import business.relatorios.IRelatorios;
+import entidades.Categoria;
 import entidades.ContratoAluguel;
 import entidades.Item;
 import entidades.Usuario;
@@ -15,17 +17,16 @@ public class SistemaFacade {
     private IGerenciamentoUsuarios gerenciamentoUsuarios;
     private IGerenciamentoContratos gerenciamentoContratos;
     private IGerenciamentoItens gerenciamentoItens;
-
-
-
+    private IGerenciamentoCategoria gerenciamentoCategoria;
 
     private IRelatorios geradorRelatorios;
 
-    public SistemaFacade(IGerenciamentoUsuarios gerenciamentoUsuarios, IGerenciamentoContratos gerenciamentoContratos, IGerenciamentoItens gerenciamentoItens, IRelatorios geradorRelatorios) {
+    public SistemaFacade(IGerenciamentoUsuarios gerenciamentoUsuarios, IGerenciamentoContratos gerenciamentoContratos, IGerenciamentoItens gerenciamentoItens, IGerenciamentoCategoria gerenciamentoCategoria,  IRelatorios geradorRelatorios) {
 
         this.gerenciamentoUsuarios = gerenciamentoUsuarios;
         this.gerenciamentoContratos = gerenciamentoContratos;
         this.gerenciamentoItens = gerenciamentoItens;
+        this.gerenciamentoCategoria = gerenciamentoCategoria;
         this.geradorRelatorios = geradorRelatorios;
     }
 
@@ -143,5 +144,31 @@ public class SistemaFacade {
 
     public void gerarRelatorioFaturamento(String dataInicial, String dataFinal) {
         geradorRelatorios.gerarRelatorioFaturamento(dataInicial, dataFinal);
+    }
+    // ==========================
+    // Categoria
+    // ==========================
+    public boolean cadastrarCategoria(Categoria categoria) {
+    return gerenciamentoCategoria.cadastrarCategoria(categoria);
+    }
+    
+    public Categoria buscarCategoria(int id) {
+        return gerenciamentoCategoria.buscarCategoria(id);
+    }
+    
+    public List<Categoria> listarCategorias() {
+        return gerenciamentoCategoria.listarCategorias();
+    }
+    
+    public boolean atualizarCategoria(int id, String nome, String descricao) {
+        return gerenciamentoCategoria.atualizarCategoria(id, nome, descricao);
+    }
+    
+    public boolean desativarCategoria(int id) {
+        return gerenciamentoCategoria.desativarCategoria(id);
+    }
+    
+    public int gerarProximoIdCategoria() {
+        return gerenciamentoCategoria.gerarProximoId();
     }
 }

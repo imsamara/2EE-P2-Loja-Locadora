@@ -1,68 +1,43 @@
 package business.cruds;
+
 import java.util.List;
 
 import business.interfaces.IGerenciamentoContratos;
 import entidades.ContratoAluguel;
-import persistencia.SalvaArquivoContratos;
-import repositories.IContratoRepositorio;
+import repositories.ContratoRepositorio;
 
 public class GerenciamentoContratos implements IGerenciamentoContratos {
 
-    private IContratoRepositorio repositorio;
-    private SalvaArquivoContratos salvaArquivo;
+    private ContratoRepositorio repositorio;
 
-    public GerenciamentoContratos(IContratoRepositorio repositorio, SalvaArquivoContratos salvaArquivo) {
-
+    public GerenciamentoContratos(ContratoRepositorio repositorio) {
         this.repositorio = repositorio;
-        this.salvaArquivo = salvaArquivo;
-    }
-
-    public void salvarDados() {
-
-        salvaArquivo.salvar(repositorio.listarTodos());
-
-    }
-
-    @Override
-    public int gerarProximoId() {
-        return repositorio.gerarProximoId();
     }
 
     @Override
     public boolean cadastrarContrato(ContratoAluguel contrato) {
-        
-        if (repositorio.buscarPorId(
-                contrato.getId()) != null) {
 
+        if (repositorio.buscarPorId(contrato.getId()) != null) {
             return false;
         }
 
-        
-        if (repositorio.buscarContratoAtivoPorItem(
-                contrato.getItem().getId()) != null) {
-
+        if (repositorio.buscarContratoAtivoPorItem(contrato.getItem().getId()) != null) {
             return false;
         }
 
         repositorio.adicionar(contrato);
-
-        salvarDados();
 
         return true;
     }
 
     @Override
     public ContratoAluguel buscarContrato(int id) {
-
         return repositorio.buscarPorId(id);
-
     }
 
     @Override
     public List<ContratoAluguel> listarContratos() {
-
         return repositorio.listarTodos();
-
     }
 
     @Override
@@ -72,12 +47,11 @@ public class GerenciamentoContratos implements IGerenciamentoContratos {
 
         if (contrato == null) {
             return false;
-
         }
 
         contrato.finalizarContrato();
-        
-        salvarDados();
+
+        repositorio.salvar();
 
         return true;
     }
@@ -89,25 +63,44 @@ public class GerenciamentoContratos implements IGerenciamentoContratos {
 
         if (contrato == null) {
             return false;
-
         }
 
         contrato.cancelarContrato();
 
-        salvarDados();
+        repositorio.salvar();
 
         return true;
     }
+
+    @Override
+    public boolean quitarMultaContrato(int idContrato) {
     
+        ContratoAluguel contrato = repositorio.buscarPorId(idContrato);
+    
+        if (contrato == null) {
+            return false;
+        }
+    
+        if (contrato.getValorMulta() <= 0 || contrato.isMultaPaga()) {
+            return false;
+        }
+    
+        contrato.setMultaPaga(true);
+    
+        repositorio.salvar();
+    
+        return true;
+    }
+
     @Override
     public boolean clientePossuiMultaPendente(int idCliente) {
 
         for (ContratoAluguel contrato : repositorio.listarTodos()) {
 
-            if (contrato.getCliente().getId() == idCliente && contrato.getValorMulta() > 0 &&!contrato.isMultaPaga()) {
-
+            if (contrato.getCliente().getId() == idCliente
+                    && contrato.getValorMulta() > 0
+                    && !contrato.isMultaPaga()) {
                 return true;
-
             }
         }
 
@@ -117,18 +110,18 @@ public class GerenciamentoContratos implements IGerenciamentoContratos {
     @Override
     public boolean clientePossuiHistorico(int idCliente) {
 
-    for (ContratoAluguel contrato : repositorio.listarTodos()) {
+        for (ContratoAluguel contrato : repositorio.listarTodos()) {
 
-        if (contrato.getCliente().getId() == idCliente) {
-
-            return true;
-
+            if (contrato.getCliente().getId() == idCliente) {
+                return true;
+            }
         }
 
+        return false;
     }
 
-    return false;
-
-}
-
+    @Override
+    public int gerarProximoId() {
+        return repositorio.gerarProximoId();
+    }
 }

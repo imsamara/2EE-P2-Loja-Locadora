@@ -17,5 +17,4 @@ public interface IGerenciamentoCategoria {
     public abstract boolean desativarCategoria(int id);
  
     public abstract int gerarProximoId();
- 
 }

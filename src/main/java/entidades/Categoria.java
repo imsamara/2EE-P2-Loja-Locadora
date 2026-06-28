@@ -1,18 +1,17 @@
 package entidades;
-
+ 
 public class Categoria {
-
+ 
     private int id;
     private String nome;
     private String descricao;
     private boolean ativa;
-
-    public Categoria(int id, String nome, String descricao, boolean ativa) {
+ 
+    public Categoria(int id, String nome, String descricao) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.ativa = ativa;
-
+        this.ativa = true;
     }
 
     public int getId() {
@@ -23,7 +22,6 @@ public class Categoria {
         this.id = id;
     }
 
-
     public String getNome() {
         return nome;
     }
@@ -31,7 +29,6 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
 
     public String getDescricao() {
         return descricao;
@@ -41,7 +38,6 @@ public class Categoria {
         this.descricao = descricao;
     }
 
-
     public boolean isAtiva() {
         return ativa;
     }
@@ -49,7 +45,6 @@ public class Categoria {
     public void setAtiva(boolean ativa) {
         this.ativa = ativa;
     }
-
 
     public void desativar() {
         this.ativa = false;

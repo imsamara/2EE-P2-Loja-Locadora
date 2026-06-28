@@ -64,9 +64,15 @@ public class ContratoAluguel {
     public String getStatus() {
         return status;
     }
+
+    public void setStatus(String status){
+        this.status = status;
+    }
+
     public boolean isAtivo() {
         return ativo;
     }
+
     public double getValorMulta() {
         return valorMulta;
     }

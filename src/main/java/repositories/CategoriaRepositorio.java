@@ -4,28 +4,70 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entidades.Categoria;
-import persistencia.LeArquivoCategorias;
 
 public class CategoriaRepositorio implements ICategoriaRepositorio {
 
+    private String arquivo = "dados/categorias.csv";
+
     private List<Categoria> categorias;
+    private ManipulaArquivo manipulaArquivo;
 
     public CategoriaRepositorio() {
 
-        LeArquivoCategorias leitor = new LeArquivoCategorias("dados");
+        manipulaArquivo = new ManipulaArquivo(arquivo);
+        categorias = carregar();
 
-        categorias = leitor.carregar();
+    }
 
-        if (categorias == null) {
+    public List<Categoria> carregar() {
 
-            categorias = new ArrayList<>();
+        List<Categoria> lista = new ArrayList<>();
+
+        for (String[] campos : manipulaArquivo.carregar()) {
+
+            if (campos.length >= 4) {
+
+                int id = Integer.parseInt(campos[0].trim());
+                String nome = campos[1].trim();
+                String descricao = campos[2].trim();
+                boolean ativa = Boolean.parseBoolean(campos[3].trim());
+
+                Categoria categoria = new Categoria(id, nome, descricao);
+
+                categoria.setAtiva(ativa);
+
+                lista.add(categoria);
+
+            }
 
         }
+
+        return lista;
+
+    }
+
+    public void salvar() {
+
+        List<String[]> linhas = new ArrayList<>();
+
+        linhas.add(new String[]{"id", "nome", "descricao", "ativa"});
+
+        for (Categoria categoria : categorias) {
+
+            linhas.add(new String[]{String.valueOf(categoria.getId()),categoria.getNome(),categoria.getDescricao(),String.valueOf(categoria.isAtiva())});
+
+        }
+
+        manipulaArquivo.salvar(linhas);
+
     }
 
     @Override
     public void adicionar(Categoria categoria) {
+
         categorias.add(categoria);
+        salvar();
+
     }
 
     @Override
@@ -48,6 +90,7 @@ public class CategoriaRepositorio implements ICategoriaRepositorio {
         }
 
         return null;
+
     }
 
     @Override
@@ -55,8 +98,7 @@ public class CategoriaRepositorio implements ICategoriaRepositorio {
 
         for (Categoria categoria : categorias) {
 
-            if (categoria.getNome()
-                    .equalsIgnoreCase(nome)) {
+            if (categoria.getNome().equalsIgnoreCase(nome)) {
 
                 return categoria;
 
@@ -65,6 +107,7 @@ public class CategoriaRepositorio implements ICategoriaRepositorio {
         }
 
         return null;
+
     }
 
     @Override
@@ -83,5 +126,7 @@ public class CategoriaRepositorio implements ICategoriaRepositorio {
         }
 
         return maiorId + 1;
+
     }
+
 }

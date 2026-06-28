@@ -15,6 +15,8 @@ public interface IGerenciamentoContratos {
 
     public abstract boolean cancelarContrato(int id);
 
+    public abstract boolean quitarMultaContrato(int idContrato);
+
     public abstract int gerarProximoId();
 
     public boolean clientePossuiMultaPendente(int idCliente);

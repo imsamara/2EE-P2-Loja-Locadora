@@ -1,12 +1,12 @@
-package persistencia;
-
-import entidades.Item;
+package repositories;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
+import entidades.Item;
 
 public class SalvaRelatorioItensDisponiveis {
 

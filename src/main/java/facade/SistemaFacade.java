@@ -4,35 +4,49 @@ import java.util.List;
 
 import business.interfaces.IGerenciamentoCategoria;
 import business.interfaces.IGerenciamentoContratos;
+import business.interfaces.IGerenciamentoFornecedor;
 import business.interfaces.IGerenciamentoItens;
+import business.interfaces.IGerenciamentoMultas;
 import business.interfaces.IGerenciamentoUsuarios;
 import business.relatorios.IRelatorios;
 import entidades.Categoria;
 import entidades.ContratoAluguel;
+import entidades.Fornecedor;
 import entidades.Item;
+import entidades.Multa;
 import entidades.Usuario;
 
 public class SistemaFacade {
 
-    private IGerenciamentoUsuarios gerenciamentoUsuarios;
-    private IGerenciamentoContratos gerenciamentoContratos;
-    private IGerenciamentoItens gerenciamentoItens;
-    private IGerenciamentoCategoria gerenciamentoCategoria;
+    private IGerenciamentoUsuarios   gerenciamentoUsuarios;
+    private IGerenciamentoContratos  gerenciamentoContratos;
+    private IGerenciamentoItens      gerenciamentoItens;
+    private IGerenciamentoCategoria  gerenciamentoCategoria;
+    private IGerenciamentoFornecedor gerenciamentoFornecedor;
+    private IGerenciamentoMultas     gerenciamentoMultas;
+    private IRelatorios              geradorRelatorios;
 
-    private IRelatorios geradorRelatorios;
+    public SistemaFacade(
+            IGerenciamentoUsuarios   gerenciamentoUsuarios,
+            IGerenciamentoContratos  gerenciamentoContratos,
+            IGerenciamentoItens      gerenciamentoItens,
+            IGerenciamentoCategoria  gerenciamentoCategoria,
+            IGerenciamentoFornecedor gerenciamentoFornecedor,
+            IGerenciamentoMultas     gerenciamentoMultas,
+            IRelatorios              geradorRelatorios) {
 
-    public SistemaFacade(IGerenciamentoUsuarios gerenciamentoUsuarios, IGerenciamentoContratos gerenciamentoContratos, IGerenciamentoItens gerenciamentoItens, IGerenciamentoCategoria gerenciamentoCategoria,  IRelatorios geradorRelatorios) {
-
-        this.gerenciamentoUsuarios = gerenciamentoUsuarios;
-        this.gerenciamentoContratos = gerenciamentoContratos;
-        this.gerenciamentoItens = gerenciamentoItens;
-        this.gerenciamentoCategoria = gerenciamentoCategoria;
-        this.geradorRelatorios = geradorRelatorios;
+        this.gerenciamentoUsuarios   = gerenciamentoUsuarios;
+        this.gerenciamentoContratos  = gerenciamentoContratos;
+        this.gerenciamentoItens      = gerenciamentoItens;
+        this.gerenciamentoCategoria  = gerenciamentoCategoria;
+        this.gerenciamentoFornecedor = gerenciamentoFornecedor;
+        this.gerenciamentoMultas     = gerenciamentoMultas;
+        this.geradorRelatorios       = geradorRelatorios;
     }
 
-    // =========================
+    // =========================================================================
     // USUÁRIOS
-    // =========================
+    // =========================================================================
 
     public boolean cadastrarUsuario(Usuario usuario) {
         return gerenciamentoUsuarios.cadastrarUsuario(usuario);
@@ -40,6 +54,13 @@ public class SistemaFacade {
 
     public Usuario buscarUsuario(int id) {
         return gerenciamentoUsuarios.buscarUsuario(id);
+    }
+
+    public Usuario buscarUsuarioPorEmail(String email) {
+        for (Usuario u : gerenciamentoUsuarios.listarUsuarios()) {
+            if (u.getEmail().equalsIgnoreCase(email)) return u;
+        }
+        return null;
     }
 
     public List<Usuario> listarUsuarios() {
@@ -62,9 +83,9 @@ public class SistemaFacade {
         return gerenciamentoUsuarios.gerarProximoId();
     }
 
-    // =========================
+    // =========================================================================
     // CONTRATOS
-    // =========================
+    // =========================================================================
 
     public boolean cadastrarContrato(ContratoAluguel contrato) {
         return gerenciamentoContratos.cadastrarContrato(contrato);
@@ -86,22 +107,24 @@ public class SistemaFacade {
         return gerenciamentoContratos.cancelarContrato(id);
     }
 
+    public boolean clientePossuiMultaPendente(int idCliente) {
+        return gerenciamentoContratos.clientePossuiMultaPendente(idCliente);
+    }
+
+    public boolean clientePossuiHistorico(int idCliente) {
+        return gerenciamentoContratos.clientePossuiHistorico(idCliente);
+    }
+
     public int gerarProximoIdContrato() {
         return gerenciamentoContratos.gerarProximoId();
     }
-    public boolean clientePossuiMultaPendente(int idCliente) {
-        return gerenciamentoContratos.clientePossuiMultaPendente(idCliente);
-
-    }
-    public boolean clientePossuiHistorico(int idCliente) {
-
-        return gerenciamentoContratos.clientePossuiHistorico(idCliente);
-
+    public boolean quitarMultaContrato(int idContrato) {
+        return gerenciamentoContratos.quitarMultaContrato(idContrato);
     }
 
-    // =========================
+    // =========================================================================
     // ITENS
-    // =========================
+    // =========================================================================
 
     public boolean cadastrarItem(Item item) {
         return gerenciamentoItens.cadastrarItem(item);
@@ -115,8 +138,10 @@ public class SistemaFacade {
         return gerenciamentoItens.listarItens();
     }
 
-    public boolean atualizarItem(int id, String nome, String descricao, double taxaDiaria, String estadoConservacao, double valorReposicao) {
-        return gerenciamentoItens.atualizarItem(id, nome, descricao, taxaDiaria, estadoConservacao, valorReposicao);
+    public boolean atualizarItem(int id, String nome, String descricao,
+            double taxaDiaria, String estadoConservacao, double valorReposicao) {
+        return gerenciamentoItens.atualizarItem(
+                id, nome, descricao, taxaDiaria, estadoConservacao, valorReposicao);
     }
 
     public boolean excluirItem(int id) {
@@ -127,13 +152,102 @@ public class SistemaFacade {
         return gerenciamentoItens.gerarProximoId();
     }
 
-    // =========================
-    // Relatórios
-    // =========================
-    
+    // =========================================================================
+    // CATEGORIAS
+    // =========================================================================
+
+    public boolean cadastrarCategoria(Categoria categoria) {
+        return gerenciamentoCategoria.cadastrarCategoria(categoria);
+    }
+
+    public Categoria buscarCategoria(int id) {
+        return gerenciamentoCategoria.buscarCategoria(id);
+    }
+
+    public List<Categoria> listarCategorias() {
+        return gerenciamentoCategoria.listarCategorias();
+    }
+
+    public boolean atualizarCategoria(int id, String nome, String descricao) {
+        return gerenciamentoCategoria.atualizarCategoria(id, nome, descricao);
+    }
+
+    public boolean desativarCategoria(int id) {
+        return gerenciamentoCategoria.desativarCategoria(id);
+    }
+
+    public int gerarProximoIdCategoria() {
+        return gerenciamentoCategoria.gerarProximoId();
+    }
+
+    // =========================================================================
+    // FORNECEDORES
+    // =========================================================================
+
+    public boolean cadastrarFornecedor(Fornecedor fornecedor) {
+        return gerenciamentoFornecedor.cadastrarFornecedor(fornecedor);
+    }
+
+    public Fornecedor buscarFornecedor(int id) {
+        return gerenciamentoFornecedor.buscarFornecedor(id);
+    }
+
+    public List<Fornecedor> listarFornecedores() {
+        return gerenciamentoFornecedor.listarFornecedores();
+    }
+
+    public boolean atualizarFornecedor(int id, String razaoSocial, String email, String telefone) {
+        return gerenciamentoFornecedor.atualizarFornecedor(id, razaoSocial, email, telefone);
+    }
+
+    public boolean desativarFornecedor(int id) {
+        return gerenciamentoFornecedor.desativarFornecedor(id);
+    }
+
+    public int gerarProximoIdFornecedor() {
+        return gerenciamentoFornecedor.gerarProximoId();
+    }
+
+    // =========================================================================
+    // MULTAS
+    // =========================================================================
+
+    public boolean registrarMulta(Multa multa) {
+        return gerenciamentoMultas.registrarMulta(multa);
+    }
+
+    public Multa buscarMulta(int id) {
+        return gerenciamentoMultas.buscarMulta(id);
+    }
+
+    public List<Multa> listarMultas() {
+        return gerenciamentoMultas.listarMultas();
+    }
+
+    public List<Multa> listarMultasPorContrato(int idContrato) {
+        return gerenciamentoMultas.listarMultasPorContrato(idContrato);
+    }
+
+    public List<Multa> listarMultasPendentes() {
+        return gerenciamentoMultas.listarMultasPendentes();
+    }
+
+    public boolean quitarMulta(int id) {
+        return gerenciamentoMultas.quitarMulta(id);
+    }
+
+    public int gerarProximoIdMulta() {
+        return gerenciamentoMultas.gerarProximoId();
+    }
+
+    // =========================================================================
+    // RELATÓRIOS
+    // =========================================================================
+
     public void gerarRelatorioItensDisponiveis() {
         geradorRelatorios.gerarRelatorioItensDisponiveis();
     }
+
     public void gerarHistoricoCliente(int idCliente) {
         geradorRelatorios.gerarHistoricoCliente(idCliente);
     }
@@ -144,31 +258,5 @@ public class SistemaFacade {
 
     public void gerarRelatorioFaturamento(String dataInicial, String dataFinal) {
         geradorRelatorios.gerarRelatorioFaturamento(dataInicial, dataFinal);
-    }
-    // ==========================
-    // Categoria
-    // ==========================
-    public boolean cadastrarCategoria(Categoria categoria) {
-    return gerenciamentoCategoria.cadastrarCategoria(categoria);
-    }
-    
-    public Categoria buscarCategoria(int id) {
-        return gerenciamentoCategoria.buscarCategoria(id);
-    }
-    
-    public List<Categoria> listarCategorias() {
-        return gerenciamentoCategoria.listarCategorias();
-    }
-    
-    public boolean atualizarCategoria(int id, String nome, String descricao) {
-        return gerenciamentoCategoria.atualizarCategoria(id, nome, descricao);
-    }
-    
-    public boolean desativarCategoria(int id) {
-        return gerenciamentoCategoria.desativarCategoria(id);
-    }
-    
-    public int gerarProximoIdCategoria() {
-        return gerenciamentoCategoria.gerarProximoId();
     }
 }

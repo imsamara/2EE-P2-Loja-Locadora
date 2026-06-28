@@ -1,23 +1,21 @@
 package business.cruds;
+
 import java.util.List;
 
-
+import business.interfaces.IGerenciamentoContratos;
 import business.interfaces.IGerenciamentoUsuarios;
 import entidades.Usuario;
-import persistencia.SalvaArquivoUsuarios;
-import repositories.IUsuarioRepositorio;
+import repositories.UsuarioRepositorio;
+
 public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
 
-    private IUsuarioRepositorio repositorio;
-    private SalvaArquivoUsuarios salvaArquivo;
+    private UsuarioRepositorio repositorio;
+    private IGerenciamentoContratos gerenciamentoContratos;
 
-    public GerenciamentoUsuarios(IUsuarioRepositorio repositorio, SalvaArquivoUsuarios salvaArquivo) {
-        this.repositorio = repositorio;
-        this.salvaArquivo = salvaArquivo;
-    }
-
-    public void salvarDados() {
-        salvaArquivo.salvar(repositorio.listarTodos());
+    public GerenciamentoUsuarios(UsuarioRepositorio repositorio,
+                                  IGerenciamentoContratos gerenciamentoContratos) {
+        this.repositorio            = repositorio;
+        this.gerenciamentoContratos = gerenciamentoContratos;
     }
 
     @Override
@@ -36,8 +34,6 @@ public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
         }
 
         repositorio.adicionar(usuario);
-
-        salvarDados();
 
         return true;
     }
@@ -65,21 +61,29 @@ public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
         usuario.setEmail(email);
         usuario.setSenha(senha);
 
-        salvarDados();
+        repositorio.salvar();
 
         return true;
     }
 
     @Override
-    public boolean excluirUsuario(int id) {
+    public boolean desativaUsuario(int id) {
 
         Usuario usuario = repositorio.buscarPorId(id);
 
         if (usuario == null) {
             return false;
         }
+
+        if (gerenciamentoContratos.clientePossuiMultaPendente(id)) {
+            System.out.println("Usuário possui multas pendentes e não pode ser desativado.");
+            return false;
+        }
+
         usuario.setAtivo(false);
-        salvarDados();
+
+        repositorio.salvar();
+
         return true;
     }
 
@@ -88,11 +92,7 @@ public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
 
         Usuario usuario = repositorio.buscarPorEmail(email);
 
-        if (usuario == null) {
-            return null;
-        }
-
-        if (!usuario.isAtivo()) {
+        if (usuario == null || !usuario.isAtivo()) {
             return null;
         }
 
@@ -102,6 +102,7 @@ public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
 
         return usuario;
     }
+
     @Override
     public int gerarProximoId() {
         return repositorio.gerarProximoId();

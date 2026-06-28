@@ -5,16 +5,15 @@ import entidades.Multa;
 
 public interface IMultaRepositorio {
 
-    public abstract void gerar(Multa multa);
+    public abstract void adicionar(Multa multa);
 
-    public abstract List<Multa> listarTodas();
+    public abstract List<Multa> listarTodos();
 
-    public abstract Multa buscarPorNomeCliente(String nomeCliente);
+    public abstract Multa buscarPorId(int id);
 
-    public abstract Multa buscarPorId(int idMulta);
-    
-    public abstract void remover(Multa multa);
+    public abstract List<Multa> buscarPorContrato(int idContrato);
+
+    public abstract List<Multa> buscarPendentes();
 
     public abstract int gerarProximoId();
-
 }

@@ -1,62 +1,68 @@
 package entidades;
 
 public class Multa {
-	private int idMulta;
-	private double valorMulta;
-	private String nomeCliente;
-	private String dataVencimento;
-	private boolean statusPendencia;
-	
-	public Multa (int idMulta, double valorMulta, String nomeCliente, String dataVencimento, boolean statusPendecia) {
-		this.idMulta = idMulta;
-		this.valorMulta = valorMulta;
-		this.nomeCliente = nomeCliente;
-		this.dataVencimento = dataVencimento;
-		this.statusPendencia = true;
-	}
 
-	public int getIdMulta() {
-		return idMulta;
-	}
+    private int id;
+    private int idContrato;
+    private String tipo;       
+    private String descricao;
+    private double valor;
+    private boolean paga;
+    private String dataCriacao;
 
-	public void setIdMulta(int idMulta) {
-		this.idMulta = idMulta;
-	}
+    public Multa(int id, int idContrato, String tipo, String descricao, double valor, String dataCriacao) {
+        this.id = id;
+        this.idContrato = idContrato;
+        this.tipo = tipo;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.paga = false;
+        this.dataCriacao = dataCriacao;
+    }
 
-	public double getValorMulta() {
-		return valorMulta;
-	}
+   
 
-	public void setValorMulta(double valorMulta) {
-		this.valorMulta = valorMulta;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getNomeCliente() {
-		return nomeCliente;
-	}
+    public int getIdContrato() {
+        return idContrato;
+    }
 
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
-	}
+    public String getTipo() {
+        return tipo;
+    }
 
-	public String getDataVencimento() {
-		return dataVencimento;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public void setDataVencimento(String dataVencimento) {
-		this.dataVencimento = dataVencimento;
-	}
+    public double getValor() {
+        return valor;
+    }
 
-	public void pendenciaAtivada() {
-		this.statusPendencia = true;
-	}
-	
-	public void pendenciaDesativada() {
-		this.statusPendencia = false;
-	}
-	
-	public boolean isStatusPendencia() {
-		return statusPendencia;
-	}
-	
+    public boolean isPaga() {
+        return paga;
+    }
+
+    public String getDataCriacao() {
+        return dataCriacao;
+    }
+
+    
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setPaga(boolean paga) {
+        this.paga = paga;
+    }
+
+    
+
+    public void pagar() {
+        this.paga = true;
+    }
+
 }

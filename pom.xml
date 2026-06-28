@@ -56,7 +56,6 @@
     <build>
         <pluginManagement>
             <plugins>
-
                 <!-- Clean -->
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>

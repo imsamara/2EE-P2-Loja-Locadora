@@ -1,22 +1,21 @@
 package entidades;
+ 
 public class Fornecedor {
-
+ 
     private int id;
     private String razaoSocial;
     private String cnpj;
     private String email;
     private String telefone;
-    private boolean statusAtivo;
-
-    public Fornecedor(int id, String razaoSocial, String cnpj, String email, String telefone, boolean statusAtivo){
-
+    private boolean ativo;
+ 
+    public Fornecedor(int id, String razaoSocial, String cnpj, String email, String telefone) {
         this.id = id;
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
         this.email = email;
         this.telefone = telefone;
-        this.statusAtivo = true;
-
+        this.ativo = true;
     }
 
     public int getId() {
@@ -39,9 +38,6 @@ public class Fornecedor {
         return cnpj;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
 
     public String getEmail() {
         return email;
@@ -59,17 +55,14 @@ public class Fornecedor {
         this.telefone = telefone;
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
 
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
     public void desativar() {
-        this.statusAtivo = false;
+        this.ativo = false;
     }
-
-    public void ativar() {
-        this.statusAtivo = true;
-    }
-    public boolean estaDisponivel() {
-        return statusAtivo;
-    }
-
-    
 }

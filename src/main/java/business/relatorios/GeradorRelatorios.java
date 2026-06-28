@@ -7,14 +7,13 @@ import java.util.List;
 import business.interfaces.IGerenciamentoContratos;
 import business.interfaces.IGerenciamentoItens;
 import business.interfaces.IGerenciamentoUsuarios;
-import entidades.Cliente;
 import entidades.ContratoAluguel;
 import entidades.Item;
 import entidades.Usuario;
-import persistencia.SalvaRelatorioFaturamento;
-import persistencia.SalvaRelatorioHistoricoCliente;
-import persistencia.SalvaRelatorioItensAlugados;
-import persistencia.SalvaRelatorioItensDisponiveis;
+import repositories.SalvaRelatorioFaturamento;
+import repositories.SalvaRelatorioHistoricoCliente;
+import repositories.SalvaRelatorioItensAlugados;
+import repositories.SalvaRelatorioItensDisponiveis;
 
 public class GeradorRelatorios implements IRelatorios {
 
@@ -90,7 +89,7 @@ public class GeradorRelatorios implements IRelatorios {
                 System.out.println("Cliente: " + usuario.getNome());
 
                 System.out.printf("%-5s %-20s %-12s %-12s %-12s %-10s %-10s%n","ID","ITEM","RETIRADA","PREVISTA","STATUS","VALOR","MULTA");
-
+                
                 for (ContratoAluguel contrato : historico) {
 
                     System.out.printf("%-5d %-20s %-12s %-12s %-12s %-10.2f %-10.2f%n", contrato.getId(), contrato.getItem().getNome(), contrato.getDataRetirada(),

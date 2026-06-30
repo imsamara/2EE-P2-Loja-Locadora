@@ -43,8 +43,14 @@ public class ValidaEntrada {
     
     public static String lerEmail(Scanner scanner) {	
     	boolean continuar = true;
+    	
     	while (continuar) {
     		String entrada = scanner.nextLine().trim();
+    		
+    		if (entrada.isEmpty()) {
+                return "";
+            }
+    		
     		if (entrada.endsWith("@loja.com")) {
     			return entrada;
     		}
@@ -60,6 +66,10 @@ public class ValidaEntrada {
     	
     	while (continuar) {
     		String entrada = scanner.nextLine().trim();
+    		
+    		if (entrada.isEmpty()) {
+                return "";
+            }
     		
     		Matcher matcher = padraoCpf.matcher(entrada);
     		
@@ -80,6 +90,10 @@ public class ValidaEntrada {
     	while (continuar) {
     		String entrada = scanner.nextLine().trim();
     		
+    		if (entrada.isEmpty()) {
+                return "";
+            }
+    		
     		Matcher matcherAntigo = padraoCnpjAntigo.matcher(entrada);
     		Matcher matcherNovo = padraoCnpjNovo.matcher(entrada);
     		
@@ -99,6 +113,10 @@ public class ValidaEntrada {
     	
     	while (continuar) {
     		String entrada = scanner.nextLine().trim();
+    		
+    		if (entrada.isEmpty()) {
+                return "";
+            }
     		
     		Matcher matcherCelular = padraoTelefoneCelular.matcher(entrada);
     		Matcher matcherFixo = padraoTelefoneFixo.matcher(entrada);

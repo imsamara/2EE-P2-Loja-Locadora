@@ -8,8 +8,7 @@
 
 ### CRUDs
 
-* CRUD de Usuários
-* CRUD de Itens
+* CRUD de Fornecedores
 
 ### Regras de Negócio
 
@@ -45,12 +44,6 @@
 ### Regras de Negócio
 
 * RN04 - Inadimplência
-* RN05 - Integridade
-
-### Persistência de Dados
-
-* Implementação do salvamento e carregamento dos dados utilizando arquivos
-* Manipulação da persistência sem utilização de banco de dados
 
 ### Documentação
 
@@ -72,13 +65,18 @@
 
 ### CRUDs
 
-* CRUD de Fornecedores
+* CRUD de Usuários
 * CRUD de Contratos de Aluguel
 
 ### Regras de Negócio
 
 * RN02 - Cálculo de Valor
 * RN03 - Multa por Atraso
+
+### Persistência de Dados
+
+* Implementação do salvamento e carregamento dos dados utilizando arquivos
+* Manipulação da persistência sem utilização de banco de dados
 
 ### Padrões de Projeto
 
@@ -87,6 +85,13 @@
 ### Observações
 
 * Caso novas atividades sejam atribuídas, esta seção será atualizada.
+
+## João Henrique
+ ### Cruds
+ * CRUD de Itens
+ ### Regra de negócio
+ * RN05 - Integridade
+
 
 </content>
 

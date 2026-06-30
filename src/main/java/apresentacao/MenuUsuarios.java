@@ -103,10 +103,10 @@ public class MenuUsuarios {
         String nome = scanner.nextLine().trim();
 
         System.out.print("Email: ");
-        String email = scanner.nextLine().trim();
+        String email = ValidaEntrada.lerEmail(scanner);
 
         System.out.print("CPF: ");
-        String cpf = scanner.nextLine().trim();
+        String cpf = ValidaEntrada.lerCpf(scanner);
 
         System.out.print("Senha: ");
         String senha = scanner.nextLine().trim();
@@ -130,10 +130,10 @@ public class MenuUsuarios {
         String nome = scanner.nextLine().trim();
 
         System.out.print("Email: ");
-        String email = scanner.nextLine().trim();
+        String email = ValidaEntrada.lerEmail(scanner);
 
         System.out.print("CPF: ");
-        String cpf = scanner.nextLine().trim();
+        String cpf = ValidaEntrada.lerCpf(scanner);
 
         System.out.print("Senha: ");
         String senha = scanner.nextLine().trim();
@@ -157,10 +157,10 @@ public class MenuUsuarios {
         String nome = scanner.nextLine().trim();
 
         System.out.print("Email: ");
-        String email = scanner.nextLine().trim();
+        String email = ValidaEntrada.lerEmail(scanner);
 
         System.out.print("CPF: ");
-        String cpf = scanner.nextLine().trim();
+        String cpf = ValidaEntrada.lerCpf(scanner);
 
         System.out.print("Senha: ");
         String senha = scanner.nextLine().trim();
@@ -234,7 +234,7 @@ public class MenuUsuarios {
             if (nome.isEmpty()) nome = usuario.getNome();
 
             System.out.print("Novo email [" + usuario.getEmail() + "]: ");
-            String email = scanner.nextLine().trim();
+            String email = ValidaEntrada.lerEmail(scanner);
             if (email.isEmpty()) email = usuario.getEmail();
 
             System.out.print("Nova senha: ");

@@ -76,13 +76,13 @@ public class MenuFornecedores {
         String razaoSocial = scanner.nextLine().trim();
 
         System.out.print("CNPJ: ");
-        String cnpj = scanner.nextLine().trim();
+        String cnpj = ValidaEntrada.lerCnpj(scanner);
 
         System.out.print("Email: ");
-        String email = scanner.nextLine().trim();
+        String email = ValidaEntrada.lerEmail(scanner);
 
         System.out.print("Telefone: ");
-        String telefone = scanner.nextLine().trim();
+        String telefone = ValidaEntrada.lerTelefone(scanner);
 
         Fornecedor fornecedor = new Fornecedor(id, razaoSocial, cnpj, email, telefone);
 
@@ -145,11 +145,11 @@ public class MenuFornecedores {
             if (razaoSocial.isEmpty()) razaoSocial = fornecedor.getRazaoSocial();
 
             System.out.print("Email [" + fornecedor.getEmail() + "]: ");
-            String email = scanner.nextLine().trim();
+            String email = ValidaEntrada.lerEmail(scanner);
             if (email.isEmpty()) email = fornecedor.getEmail();
 
             System.out.print("Telefone [" + fornecedor.getTelefone() + "]: ");
-            String telefone = scanner.nextLine().trim();
+            String telefone = ValidaEntrada.lerTelefone(scanner);
             if (telefone.isEmpty()) telefone = fornecedor.getTelefone();
 
             if (sistema.atualizarFornecedor(id, razaoSocial, email, telefone)) {

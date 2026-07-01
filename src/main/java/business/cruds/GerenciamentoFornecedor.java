@@ -6,11 +6,11 @@ import business.interfaces.IGerenciamentoFornecedor;
 import entidades.Fornecedor;
 import repositories.FornecedorRepositorio;
 
-public class GerenciarFornecedor implements IGerenciamentoFornecedor {
+public class GerenciamentoFornecedor implements IGerenciamentoFornecedor {
 
     private FornecedorRepositorio repositorio;
 
-    public GerenciarFornecedor(FornecedorRepositorio repositorio) {
+    public GerenciamentoFornecedor(FornecedorRepositorio repositorio) {
         this.repositorio = repositorio;
     }
 

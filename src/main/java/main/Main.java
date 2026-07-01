@@ -7,7 +7,7 @@ import business.cruds.GerenciamentoContratos;
 import business.cruds.GerenciamentoItens;
 import business.cruds.GerenciamentoMultas;
 import business.cruds.GerenciamentoUsuarios;
-import business.cruds.GerenciarFornecedor;
+import business.cruds.GerenciamentoFornecedor;
 import business.interfaces.IGerenciamentoCategoria;
 import business.interfaces.IGerenciamentoContratos;
 import business.interfaces.IGerenciamentoFornecedor;
@@ -43,7 +43,7 @@ public class Main {
         IGerenciamentoContratos  gerenciamentoContratos  = new GerenciamentoContratos(contratoRepositorio);
         IGerenciamentoUsuarios   gerenciamentoUsuarios   = new GerenciamentoUsuarios(usuarioRepositorio, gerenciamentoContratos);
         IGerenciamentoCategoria  gerenciamentoCategoria  = new GerenciamentoCategoria(categoriaRepositorio);
-        IGerenciamentoFornecedor gerenciamentoFornecedor = new GerenciarFornecedor(fornecedorRepositorio);
+        IGerenciamentoFornecedor gerenciamentoFornecedor = new GerenciamentoFornecedor(fornecedorRepositorio);
         IGerenciamentoItens      gerenciamentoItens      = new GerenciamentoItens(itemRepositorio);
         IGerenciamentoMultas     gerenciamentoMultas     = new GerenciamentoMultas(multaRepositorio);
 

@@ -41,20 +41,18 @@ public class GerenciamentoFornecedor implements IGerenciamentoFornecedor {
     }
 
     @Override
-    public boolean atualizarFornecedor(int id, String razaoSocial, String email, String telefone) {
+    public boolean atualizarFornecedor(Fornecedor fornecedorNovo) {
 
-        Fornecedor fornecedor = repositorio.buscarPorId(id);
+        List<Fornecedor> fornecedores = repositorio.listarTodos();
 
-        if (fornecedor == null) {
-            return false;
+        for (int i = 0; i < fornecedores.size(); i++){
+            if (fornecedores.get(i).getId() == fornecedorNovo.getId()){
+                fornecedores.set(i, fornecedorNovo);
+                repositorio.salvar();
+                return true;
+            }
         }
-
-        fornecedor.setRazaoSocial(razaoSocial);
-        fornecedor.setEmail(email);
-        fornecedor.setTelefone(telefone);
-        repositorio.salvar();
-
-        return true;
+        return false;
     }
 
     @Override

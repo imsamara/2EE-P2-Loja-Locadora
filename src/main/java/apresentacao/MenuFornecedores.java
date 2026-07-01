@@ -152,7 +152,8 @@ public class MenuFornecedores {
             String telefone = ValidaEntrada.lerTelefone(scanner);
             if (telefone.isEmpty()) telefone = fornecedor.getTelefone();
 
-            if (sistema.atualizarFornecedor(id, razaoSocial, email, telefone)) {
+            Fornecedor fornecedorNovo = new Fornecedor(id, razaoSocial, fornecedor.getCnpj(), email, telefone);
+            if (sistema.atualizarFornecedor(fornecedorNovo)) {
                 System.out.println("Fornecedor atualizado com sucesso");
             } else {
                 System.out.println("Erro ao atualizar fornecedor");

@@ -196,8 +196,8 @@ public class SistemaFacade {
         return gerenciamentoFornecedor.listarFornecedores();
     }
 
-    public boolean atualizarFornecedor(int id, String razaoSocial, String email, String telefone) {
-        return gerenciamentoFornecedor.atualizarFornecedor(id, razaoSocial, email, telefone);
+    public boolean atualizarFornecedor(Fornecedor fornecedorNovo) {
+        return gerenciamentoFornecedor.atualizarFornecedor(fornecedorNovo);
     }
 
     public boolean desativarFornecedor(int id) {

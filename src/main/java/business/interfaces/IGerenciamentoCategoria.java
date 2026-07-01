@@ -11,7 +11,7 @@ public interface IGerenciamentoCategoria {
  
     public abstract List<Categoria> listarCategorias();
  
-    public abstract boolean atualizarCategoria(int id, String nome, String descricao);
+    public abstract boolean atualizarCategoria(Categoria categoriaNova);
  
     public abstract boolean desativarCategoria(int id);
  

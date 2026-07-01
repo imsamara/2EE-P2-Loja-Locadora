@@ -8,13 +8,15 @@ import java.util.regex.Matcher;
 public class ValidaEntrada {
 
     public static int lerInteiro(Scanner scanner) {
-        while (true) {
+		boolean continuar = true;
+        while (continuar) {
             try {
                 return Integer.parseInt(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
                 System.out.print("Digite apenas números: ");
             }
         }
+		return -1;
     }
 
     public static double lerDouble(Scanner scanner) {

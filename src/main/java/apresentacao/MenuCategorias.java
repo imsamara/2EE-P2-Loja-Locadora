@@ -61,7 +61,7 @@ public class MenuCategorias {
                     break;
 
                 default:
-                    System.out.println("Opção inválida.");
+                    System.out.println("Opção inválida");
             }
 
         } while (opcao != 0);
@@ -139,13 +139,17 @@ public class MenuCategorias {
 
             System.out.print("Nome [" + categoria.getNome() + "]: ");
             String nome = scanner.nextLine().trim();
-            if (nome.isEmpty()) nome = categoria.getNome();
+            if (nome.isEmpty()){
+                nome = categoria.getNome();
+            }
 
             System.out.print("Descrição [" + categoria.getDescricao() + "]: ");
             String descricao = scanner.nextLine().trim();
-            if (descricao.isEmpty()) descricao = categoria.getDescricao();
-
-            if (sistema.atualizarCategoria(id, nome, descricao)) {
+            if (descricao.isEmpty()){
+                 descricao = categoria.getDescricao();
+            }
+            Categoria categoriaNova = new Categoria(id, nome, descricao);
+            if (sistema.atualizarCategoria(categoriaNova)) {
                 System.out.println("Categoria atualizada com sucesso");
             } else {
                 System.out.println("Erro ao atualizar categoria");

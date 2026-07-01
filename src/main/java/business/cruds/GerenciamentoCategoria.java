@@ -41,20 +41,19 @@ public class GerenciamentoCategoria implements IGerenciamentoCategoria {
     }
 
     @Override
-    public boolean atualizarCategoria(int id, String nome, String descricao) {
+    public boolean atualizarCategoria(Categoria categoriaNova) {
 
-        Categoria categoria = repositorio.buscarPorId(id);
+        List<Categoria> categorias = repositorio.listarTodos();
 
-        if (categoria == null) {
-            return false;
+        for (int i = 0; i < categorias.size(); i++) {
+            if (categorias.get(i).getId() == categoriaNova.getId()) {
+                categorias.set(i, categoriaNova);
+                repositorio.salvar();
+                return true;
+            }
         }
 
-        categoria.setNome(nome);
-        categoria.setDescricao(descricao);
-
-        repositorio.salvar(); 
-
-        return true;
+        return false;
     }
 
     @Override

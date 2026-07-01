@@ -168,8 +168,8 @@ public class SistemaFacade {
         return gerenciamentoCategoria.listarCategorias();
     }
 
-    public boolean atualizarCategoria(int id, String nome, String descricao) {
-        return gerenciamentoCategoria.atualizarCategoria(id, nome, descricao);
+    public boolean atualizarCategoria(Categoria categoriaNova) {
+        return gerenciamentoCategoria.atualizarCategoria(categoriaNova);
     }
 
     public boolean desativarCategoria(int id) {

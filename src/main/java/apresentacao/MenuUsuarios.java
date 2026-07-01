@@ -241,7 +241,8 @@ public class MenuUsuarios {
             String senha = scanner.nextLine().trim();
             if (senha.isEmpty()) senha = usuario.getSenha();
 
-            if (sistema.atualizarUsuario(id, nome, email, senha)) {
+            Usuario usuarioNovo = new Usuario(id, nome, email, senha);
+            if (sistema.atualizarUsuario(usuarioNovo)) {
                 System.out.println("Usuário atualizado com sucesso");
             } else {
                 System.out.println("Erro ao atualizar usuário");

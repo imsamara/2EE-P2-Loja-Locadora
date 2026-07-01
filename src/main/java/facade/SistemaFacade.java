@@ -67,8 +67,8 @@ public class SistemaFacade {
         return gerenciamentoUsuarios.listarUsuarios();
     }
 
-    public boolean atualizarUsuario(int id, String nome, String email, String senha) {
-        return gerenciamentoUsuarios.atualizarUsuario(id, nome, email, senha);
+    public boolean atualizarUsuario(Usuario usuarioNovo) {
+        return gerenciamentoUsuarios.atualizarUsuario(usuarioNovo);
     }
 
     public boolean desativaUsuario(int id) {

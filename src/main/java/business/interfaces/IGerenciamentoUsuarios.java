@@ -11,7 +11,7 @@ public interface IGerenciamentoUsuarios {
 
     public abstract List<Usuario> listarUsuarios();
 
-    public abstract boolean atualizarUsuario(int id, String nome, String email, String senha);
+    public abstract boolean atualizarUsuario(Usuario usuarioNovo);
 
     public abstract boolean desativaUsuario(int id);
 

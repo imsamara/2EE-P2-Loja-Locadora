@@ -253,7 +253,7 @@ public class MenuItens {
             String reposicaoStr = scanner.nextLine().trim();
             double valorReposicao = reposicaoStr.isEmpty() ? item.getValorReposicao() : Double.parseDouble(reposicaoStr);
 
-            Item itemNovo = new Item(id, nome, descricao, taxaDiaria, estado, valorReposicao);
+            Item itemNovo = new Item(id, nome, descricao, taxaDiaria, estado, valorReposicao, item.getCategoria(), item.getFornecedor());
             if (sistema.atualizarItem(itemNovo)) {
                 System.out.println("Item atualizado com sucesso");
             } else {

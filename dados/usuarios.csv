@@ -1,1 +1,4 @@
-
+id;tipo;nome;email;cpf;senha;ativo
+1;Administrador;Jackson-Raniel;jacksonmepassaporfavor@loja.com;000.000.000-00;obrigadojackson;true
+2;Cliente;Joao;joao@loja.com;140.401.644-90;aaa;true
+3;Cliente;Maria;maria@loja.com;140.401.604-01;123;true

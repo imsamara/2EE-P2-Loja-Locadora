@@ -196,7 +196,7 @@ public class MenuContratos {
             
         } else{
 
-            if (!contrato.estaAtivo()) {
+            if (!contrato.estaAtivo() || contrato.estaFinalizado()) {
                 System.out.println("Este contrato não está ativo. Status: " + contrato.getStatus());
                 
             } else{
@@ -252,7 +252,8 @@ public class MenuContratos {
             System.out.println("Contrato não encontrado");
         } else{
 
-            if (sistema.cancelarContrato(id)) {
+            if (!(contrato.getStatus().equals("FINALIZADO"))) {
+                sistema.cancelarContrato(id);
                 contrato.getItem().devolver();
                 System.out.println("Contrato cancelado. Item devolvido ao estoque");
             } else {

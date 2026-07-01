@@ -89,7 +89,7 @@ public class MenuFornecedores {
         if (sistema.cadastrarFornecedor(fornecedor)) {
             System.out.println("Fornecedor cadastrado com sucesso. ID: " + id);
         } else {
-            System.out.println("Erro: já existe um fornecedor com esse CNPJ.");
+            System.out.println("Erro: já existe um fornecedor com esse CNPJ");
         }
     }
 

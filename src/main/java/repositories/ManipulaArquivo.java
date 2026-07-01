@@ -68,11 +68,6 @@ public class ManipulaArquivo {
 
             while ((linha = reader.readLine()) != null) {
 
-                if (linha.trim().isEmpty()) {
-                    continue;
-
-                }
-
                 linhas.add(linha.split(";", -1));
 
             }

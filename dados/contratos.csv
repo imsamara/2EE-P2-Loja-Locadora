@@ -1,0 +1,2 @@
+id;idCliente;idItem;dataRetirada;dataDevolucaoPrevista;dataDevolucaoReal;valorTotal;valorMulta;status;multaPaga
+1;2;1;2026-10-20;2026-10-25;2026-11-02;1500.0;130.0;CANCELADO;false

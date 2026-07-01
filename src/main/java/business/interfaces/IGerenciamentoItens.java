@@ -12,7 +12,7 @@ public interface IGerenciamentoItens {
 
     public abstract List<Item> listarItens();
 
-    public abstract boolean atualizarItem(int id, String nome, String descricao, double taxaDiaria, String estadoConservacao, double valorReposicao);
+    public abstract boolean atualizarItem(Item itemNovo);
 
     public abstract boolean excluirItem(int id);
 

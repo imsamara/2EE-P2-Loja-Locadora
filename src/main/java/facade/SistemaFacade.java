@@ -138,10 +138,8 @@ public class SistemaFacade {
         return gerenciamentoItens.listarItens();
     }
 
-    public boolean atualizarItem(int id, String nome, String descricao,
-            double taxaDiaria, String estadoConservacao, double valorReposicao) {
-        return gerenciamentoItens.atualizarItem(
-                id, nome, descricao, taxaDiaria, estadoConservacao, valorReposicao);
+    public boolean atualizarItem(Item itemNovo) {
+        return gerenciamentoItens.atualizarItem(itemNovo);
     }
 
     public boolean excluirItem(int id) {

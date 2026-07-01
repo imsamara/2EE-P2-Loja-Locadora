@@ -37,24 +37,18 @@ public class GerenciamentoItens implements IGerenciamentoItens {
     }
 
     @Override
-    public boolean atualizarItem(int id, String nome, String descricao,
-            double taxaDiaria, String estadoConservacao, double valorReposicao) {
+    public boolean atualizarItem(Item itemNovo) {
 
-        Item item = repositorio.buscarPorId(id);
-
-        if (item == null) {
-            return false;
+        List<Item> items = repositorio.listarTodos();
+        
+        for (int i = 0; i < items.size(); i++){
+            if (items.get(i).getId() == itemNovo.getId()){
+                items.set(i, itemNovo);
+                repositorio.salvar();
+                return true;
+            }
         }
-
-        item.setNome(nome);
-        item.setDescricao(descricao);
-        item.setTaxaDiaria(taxaDiaria);
-        item.setEstadoConservacao(estadoConservacao);
-        item.setValorReposicao(valorReposicao);
-
-        repositorio.salvar();
-
-        return true;
+        return false;
     }
 
     @Override

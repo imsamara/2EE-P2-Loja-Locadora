@@ -213,16 +213,15 @@ public class MenuContratos {
 
                 if (diasAtraso > 0) {
 
-                    double multaFixa = 10.0;
-                    double multaPercentual = diasAtraso * (contrato.getItem().getTaxaDiaria() * 0.05);
-                    double multa = multaFixa + multaPercentual;
+                    double multaPercentual = sistema.calcularMulta(diasAtraso, (contrato.getItem().getTaxaDiaria()));
+                    double multa = multaPercentual;
 
                     contrato.setValorMulta(multa);
                     contrato.setMultaPaga(false);
 
                     System.out.println("\n=== MULTA POR ATRASO ===");
                     System.out.println("Dias de atraso:     " + diasAtraso);
-                    System.out.printf("Multa fixa:         R$ %.2f%n", multaFixa);
+                    System.out.printf("Multa fixa:         R$ %.2f%n", 10.0);
                     System.out.printf("Multa percentual:   R$ %.2f%n", multaPercentual);
                     System.out.printf("Multa total:        R$ %.2f%n", multa);
 

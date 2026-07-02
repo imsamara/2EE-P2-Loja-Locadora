@@ -5,14 +5,14 @@ import java.util.List;
 import business.interfaces.IGerenciamentoContratos;
 import business.interfaces.IGerenciamentoUsuarios;
 import entidades.Usuario;
-import repositories.UsuarioRepositorio;
+import repositories.IUsuarioRepositorio;
 
 public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
 
-    private UsuarioRepositorio repositorio;
+    private IUsuarioRepositorio repositorio;
     private IGerenciamentoContratos gerenciamentoContratos;
 
-    public GerenciamentoUsuarios(UsuarioRepositorio repositorio,
+    public GerenciamentoUsuarios(IUsuarioRepositorio repositorio,
                                   IGerenciamentoContratos gerenciamentoContratos) {
         this.repositorio            = repositorio;
         this.gerenciamentoContratos = gerenciamentoContratos;

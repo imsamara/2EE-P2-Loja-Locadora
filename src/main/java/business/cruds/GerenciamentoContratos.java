@@ -4,13 +4,13 @@ import java.util.List;
 
 import business.interfaces.IGerenciamentoContratos;
 import entidades.ContratoAluguel;
-import repositories.ContratoRepositorio;
+import repositories.IContratoRepositorio;
 
 public class GerenciamentoContratos implements IGerenciamentoContratos {
 
-    private ContratoRepositorio repositorio;
+    private IContratoRepositorio repositorio;
 
-    public GerenciamentoContratos(ContratoRepositorio repositorio) {
+    public GerenciamentoContratos(IContratoRepositorio repositorio) {
         this.repositorio = repositorio;
     }
 
@@ -123,5 +123,13 @@ public class GerenciamentoContratos implements IGerenciamentoContratos {
     @Override
     public int gerarProximoId() {
         return repositorio.gerarProximoId();
+    }
+
+    @Override
+    public double calcularMulta(long diasAtraso, double taxaDiaria) {
+        if (diasAtraso <= 0) {
+            return 0.0;
+        }
+        return 10 + (0.05 * taxaDiaria * diasAtraso);
     }
 }

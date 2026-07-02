@@ -4,13 +4,13 @@ import java.util.List;
 
 import business.interfaces.IGerenciamentoMultas;
 import entidades.Multa;
-import repositories.MultaRepositorio;
+import repositories.IMultaRepositorio;
 
 public class GerenciamentoMultas implements IGerenciamentoMultas {
 
-    private MultaRepositorio repositorio;
+    private IMultaRepositorio repositorio;
 
-    public GerenciamentoMultas(MultaRepositorio repositorio) {
+    public GerenciamentoMultas(IMultaRepositorio repositorio) {
         this.repositorio = repositorio;
     }
 

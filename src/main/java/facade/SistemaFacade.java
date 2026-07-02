@@ -121,6 +121,10 @@ public class SistemaFacade {
     public boolean quitarMultaContrato(int idContrato) {
         return gerenciamentoContratos.quitarMultaContrato(idContrato);
     }
+    public double calcularMulta(long diasAtraso, double taxaDiaria){
+        return gerenciamentoContratos.calcularMulta(diasAtraso, taxaDiaria);
+
+    }
 
     // =========================================================================
     // ITENS

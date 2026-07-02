@@ -4,13 +4,13 @@ import java.util.List;
 
 import business.interfaces.IGerenciamentoFornecedor;
 import entidades.Fornecedor;
-import repositories.FornecedorRepositorio;
+import repositories.IFornecedorRepositorio;
 
 public class GerenciamentoFornecedor implements IGerenciamentoFornecedor {
 
-    private FornecedorRepositorio repositorio;
+    private IFornecedorRepositorio repositorio;
 
-    public GerenciamentoFornecedor(FornecedorRepositorio repositorio) {
+    public GerenciamentoFornecedor(IFornecedorRepositorio repositorio) {
         this.repositorio = repositorio;
     }
 
@@ -64,7 +64,7 @@ public class GerenciamentoFornecedor implements IGerenciamentoFornecedor {
             return false;
         }
 
-        repositorio.desativar(id); // desativar já chama salvar()
+        repositorio.desativar(id); 
 
         return true;
     }

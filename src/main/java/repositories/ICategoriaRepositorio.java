@@ -14,6 +14,8 @@ public interface ICategoriaRepositorio {
 
     public abstract Categoria buscarPorNome(String nome);
 
+    public abstract void salvar();
+
     public abstract int gerarProximoId();
 
 }

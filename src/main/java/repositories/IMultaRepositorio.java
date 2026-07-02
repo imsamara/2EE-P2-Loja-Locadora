@@ -15,5 +15,7 @@ public interface IMultaRepositorio {
 
     public abstract List<Multa> buscarPendentes();
 
+    public abstract void salvar();
+
     public abstract int gerarProximoId();
 }

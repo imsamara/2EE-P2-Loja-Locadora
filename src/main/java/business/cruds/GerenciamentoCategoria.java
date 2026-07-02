@@ -4,13 +4,13 @@ import java.util.List;
 
 import business.interfaces.IGerenciamentoCategoria;
 import entidades.Categoria;
-import repositories.CategoriaRepositorio;
+import repositories.ICategoriaRepositorio;
 
 public class GerenciamentoCategoria implements IGerenciamentoCategoria {
 
-    private CategoriaRepositorio repositorio;
+    private ICategoriaRepositorio repositorio;
 
-    public GerenciamentoCategoria(CategoriaRepositorio repositorio) {
+    public GerenciamentoCategoria(ICategoriaRepositorio repositorio) {
         this.repositorio = repositorio;
     }
 

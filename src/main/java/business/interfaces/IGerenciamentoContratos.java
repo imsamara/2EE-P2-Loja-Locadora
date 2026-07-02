@@ -23,4 +23,6 @@ public interface IGerenciamentoContratos {
 
     public boolean clientePossuiHistorico(int idCliente);
 
+    public double calcularMulta(long diasAtraso, double taxaDiaria);
+
 }

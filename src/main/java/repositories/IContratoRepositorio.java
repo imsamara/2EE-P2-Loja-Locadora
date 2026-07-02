@@ -16,6 +16,8 @@ public interface IContratoRepositorio {
     public abstract ContratoAluguel buscarContratoAtivoPorItem(int idItem);
 
     public abstract void remover(ContratoAluguel contrato);
+    
+    public abstract void salvar();
 
     public abstract int gerarProximoId();
 

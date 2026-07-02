@@ -15,6 +15,8 @@ public interface IFornecedorRepositorio {
 
     public abstract Fornecedor buscarPorId(int id);
 
+    public abstract void salvar();
+
     public abstract int gerarProximoId();
 
 }

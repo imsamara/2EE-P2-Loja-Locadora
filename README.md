@@ -106,7 +106,15 @@ git commit -m "alterações"
 git commit -m "corrigido"
 git commit -m "teste"
 ```
-@@ -119,24 +167,26 @@
+Essas mensagens não deixam claro o que foi feito e dificultam a manutenção do projeto.
+
+## Utilize mensagens padronizadas
+
+```bash
+git commit -m "feat: adiciona CRUD de clientes"
+git commit -m "fix: corrige cálculo de multa por atraso"
+git commit -m "docs: atualiza README"
+git commit -m "test: adiciona testes do ContratoService"
 ```
 
 ## Prefixos Utilizados
@@ -129,4 +137,5 @@ git commit -m "teste"
 * Escrever mensagens objetivas e descritivas.
 * Evitar commits contendo muitas funcionalidades diferentes.
 * Sempre que possível, associar o commit à funcionalidade ou regra de negócio implementada.
+
 

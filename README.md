@@ -1,3 +1,51 @@
+#Pré-requisitos para executar o Código
+
+
+##JDK 21 instalado (java -version deve mostrar 21)
+##Apache Maven 3.8+ instalado (mvn -version)
+
+
+#1. Compilar o projeto
+
+##Na raiz do projeto (onde está o pom.xml), execute:
+
+##mvn compile
+
+###Isso baixa as dependências (JUnit 5) e compila as classes em target/classes.
+
+#2. Rodar os testes
+
+##mvn test
+
+#Compile e rode direto com do Maven, ou dê Run na main:
+
+mvn compile exec:java -Dexec.mainClass="main.Main"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Divisão de Responsabilidades da Equipe
 
 ## Samara Karen
@@ -138,5 +186,7 @@ git commit -m "test: adiciona testes do ContratoService"
 * Escrever mensagens objetivas e descritivas.
 * Evitar commits contendo muitas funcionalidades diferentes.
 * Sempre que possível, associar o commit à funcionalidade ou regra de negócio implementada.
+
+
 
 

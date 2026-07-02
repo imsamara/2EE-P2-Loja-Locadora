@@ -49,18 +49,19 @@ public class GerenciamentoUsuarios implements IGerenciamentoUsuarios {
     }
 
     @Override
-    public boolean atualizarUsuario(Usuario usuarioNovo) {
-
-        List<Usuario> usuarios = repositorio.listarTodos();
-
-        for (int i = 0; i < usuarios.size(); i++){
-            if (usuarios.get(i).getId() == usuarioNovo.getId()){
-                usuarios.set(i, usuarioNovo);
-                repositorio.salvar();
-                return true;
-            }
+    public boolean atualizarUsuario(int id, String nome, String email, String senha) {
+        
+        Usuario usuario = repositorio.buscarPorId(id);
+        if (usuario == null) {
+            return false;
         }
-        return false;
+        usuario.setNome(nome);
+        usuario.setEmail(email);
+        usuario.setSenha(senha);
+
+        repositorio.salvar();
+
+        return true;
     }
 
     @Override

@@ -234,20 +234,18 @@ public class MenuUsuarios {
             if (nome.isEmpty()) nome = usuario.getNome();
 
             System.out.print("Novo email [" + usuario.getEmail() + "]: ");
-            String email = ValidaEntrada.lerEmail(scanner);
+            String email = scanner.nextLine().trim();
             if (email.isEmpty()) email = usuario.getEmail();
 
             System.out.print("Nova senha: ");
             String senha = scanner.nextLine().trim();
             if (senha.isEmpty()) senha = usuario.getSenha();
-            
-            Usuario usuarioNovo = new Usuario(id, nome, email, senha);
-            if (sistema.atualizarUsuario(usuarioNovo)) {
+
+            if (sistema.atualizarUsuario(id, nome, email, senha)) {
                 System.out.println("Usuário atualizado com sucesso");
             } else {
                 System.out.println("Erro ao atualizar usuário");
             }
-           
         }
     }
 

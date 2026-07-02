@@ -1,51 +1,3 @@
-#Pré-requisitos para executar o Código
-
-
-##JDK 21 instalado (java -version deve mostrar 21)
-##Apache Maven 3.8+ instalado (mvn -version)
-
-
-#1. Compilar o projeto
-
-##Na raiz do projeto (onde está o pom.xml), execute:
-
-##mvn compile
-
-###Isso baixa as dependências (JUnit 5) e compila as classes em target/classes.
-
-#2. Rodar os testes
-
-##mvn test
-
-#Compile e rode direto com do Maven, ou dê Run na main:
-
-mvn compile exec:java -Dexec.mainClass="main.Main"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Divisão de Responsabilidades da Equipe
 
 ## Samara Karen
@@ -154,16 +106,7 @@ git commit -m "alterações"
 git commit -m "corrigido"
 git commit -m "teste"
 ```
-
-Essas mensagens não deixam claro o que foi feito e dificultam a manutenção do projeto.
-
-## Utilize mensagens padronizadas
-
-```bash
-git commit -m "feat: adiciona CRUD de clientes"
-git commit -m "fix: corrige cálculo de multa por atraso"
-git commit -m "docs: atualiza README"
-git commit -m "test: adiciona testes do ContratoService"
+@@ -119,24 +167,26 @@
 ```
 
 ## Prefixos Utilizados
@@ -186,7 +129,4 @@ git commit -m "test: adiciona testes do ContratoService"
 * Escrever mensagens objetivas e descritivas.
 * Evitar commits contendo muitas funcionalidades diferentes.
 * Sempre que possível, associar o commit à funcionalidade ou regra de negócio implementada.
-
-
-
 
